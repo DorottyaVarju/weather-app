@@ -1,0 +1,24 @@
+form {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    font-size: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input {
+    border: none;
+    border-bottom: 3px solid rgba(0, 0, 255, 0.24);
+    font-size: 18px;
+    width: 200px;
+    text-align: center;
+    background-color: transparent;
+}
+
+input:focus {
+    outline: none;
+}
+

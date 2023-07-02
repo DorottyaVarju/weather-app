@@ -5,9 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url("./pics/clouds.jpg");
+  background-size: 100vw 100vh;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media screen and (max-width: 900px) {
+  body{
+      background-image: url("./pics/clouds_vertical.jpg");
+  }
 }

@@ -1,0 +1,21 @@
+table {
+    margin: 10px 0px;
+    text-align: center;
+    width: 80%;
+    border-spacing: 10px;
+    margin: 100px auto;
+}
+
+th, td {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+th {
+    background-color: rgba(0, 0, 255, 0.1);
+    font-size: 18px;
+}
+
+td {
+    background-color: rgba(0, 0, 255, 0.1);
+}
