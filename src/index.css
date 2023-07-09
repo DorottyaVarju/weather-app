@@ -5,9 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./pics/clouds.jpg");
-  background-size: 100vw 100vh;
   font-family: Arial, Helvetica, sans-serif;
+  color: rgba(2, 48, 71, 0.7);
 }
 
 code {
@@ -15,8 +14,20 @@ code {
     monospace;
 }
 
-@media screen and (max-width: 900px) {
-  body{
-      background-image: url("./pics/clouds_vertical.jpg");
-  }
+.background {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.background::before{
+  content: '';
+  background: url("./pics/clouds.jpg") no-repeat center center/cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index:-1;
+  opacity: 0.5;
 }

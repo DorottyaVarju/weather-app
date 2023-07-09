@@ -1,8 +1,8 @@
 form {
     display: flex;
     justify-content: center;
-    margin-top: 10vh;
-    font-size: 20px;
+    padding-top: 10vh;
+    font-size: 1.8vw;
 }
 
 label {
@@ -11,14 +11,20 @@ label {
 
 input {
     border: none;
-    border-bottom: 3px solid rgba(0, 0, 255, 0.24);
-    font-size: 18px;
+    border-bottom: 3px solid #023047;;
+    font-size: 1.6vw;
     width: 200px;
     text-align: center;
     background-color: transparent;
+    color: rgba(255, 183, 3);
+    caret-color: rgba(2, 48, 71, 0.7);
 }
 
 input:focus {
     outline: none;
+}
+
+::placeholder { 
+    color: rgba(255, 183, 3);
 }
 

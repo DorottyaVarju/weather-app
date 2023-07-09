@@ -3,10 +3,10 @@ import Results from './components/Results.js';
 
 const App = () => {
     return (
-      <>
+      <div className='background'>
         <Form />
         <Results />
-      </>
+      </div>
     );
   };
 
