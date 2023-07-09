@@ -1,23 +1,23 @@
 form {
     display: flex;
     justify-content: center;
-    padding-top: 10vh;
+    padding-top: 5vh;
     font-size: 1.8vw;
 }
 
 label {
     font-weight: bold;
+    color: rgba(255, 183, 3);
 }
 
 input {
     border: none;
-    border-bottom: 3px solid #023047;;
+    border-bottom: 3px solid rgba(255, 183, 3);
     font-size: 1.6vw;
     width: 200px;
     text-align: center;
     background-color: transparent;
     color: rgba(255, 183, 3);
-    caret-color: rgba(2, 48, 71, 0.7);
 }
 
 input:focus {
@@ -25,6 +25,6 @@ input:focus {
 }
 
 ::placeholder { 
-    color: rgba(255, 183, 3);
+    color: rgba(255, 183, 3, 0.8);
 }
 

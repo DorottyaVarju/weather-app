@@ -1,28 +1,31 @@
 table {
     text-align: center;
-    border-spacing: 10px;
-    margin: 100px auto 0px auto;
+    border-spacing: 30px;
+    margin: 50px auto 0px auto;
 }
 
 th, td {
-    border-radius: 10% 30%;
+    border-radius: 1% 30%;
 }
 
 th {
     font-size: 1.8vw;
     padding-bottom: 80px;
+    color: rgba(255, 183, 3);
 }
 
 th span {
     text-decoration: underline;
+    color: rgba(255, 183, 3);
+    font-size: 2vw;
 }
 
 td {
-    background-color: rgba(2, 48, 71, 0.7);
+    background-color: rgba(2, 48, 71, 0.6);
     color: rgba(255, 183, 3, 1);
     font-weight: bold;
     font-size: 1.4vw;
-    height: 20vw;
+    height: 30vw;
     width: 20vw;
     border-right: 15px solid rgba(255, 183, 3, 1);
     border-bottom: 15px solid rgba(255, 183, 3, 1);
