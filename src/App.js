@@ -3,9 +3,8 @@ import Results from './components/Results.js';
 
 const App = () => {
     return (
-      <div className='background'>
+      <div>
         <Form />
-        <Results />
       </div>
     );
   };
