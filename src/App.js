@@ -3,9 +3,9 @@ import Results from './components/Results.js';
 
 const App = () => {
     return (
-      <div>
+      <>
         <Form />
-      </div>
+      </>
     );
   };
 
