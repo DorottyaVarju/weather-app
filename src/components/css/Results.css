@@ -13,32 +13,17 @@ div.results {
     flex-wrap: wrap;
 }
 
-p.bottomparagraphs {
+div.bottomparagraphs {
     opacity: 0;
     animation: setOpacity 4.5s forwards;
-    text-shadow: 2px 2px rgba(0,0,0,0.2);
-    font-size: 22px;
+    color: rgba(60, 92, 130, 0.6);
+    font-size: 10px;
     width: 40%;
-}
-
-p.bottomparagraphs:first-child {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    margin-left: 20px;
     display: flex;
-    justify-content:flex-start;
-    margin-left: 100px;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 100px;
 }
-
-p.bottomparagraphs:last-child {
-    position: fixed;
-    bottom: 1;
-    right: 0;
-    display: flex;
-    justify-content:flex-end;
-}
-
 
 @keyframes setOpacity{
     from {opacity: 0;}

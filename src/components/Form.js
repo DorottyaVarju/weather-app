@@ -1,10 +1,11 @@
 import './css/Form.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Results from './Results.js';
 
 
 const Form = () => {
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [enteredCity, setEnteredCity] = useState('');
     const [city, setCity] = useState('');
     const [country, setCountry] = useState('');
@@ -16,7 +17,8 @@ const Form = () => {
     const [max, setMax] = useState('');
     const [humidity, setHumidity] = useState('');
     const [wind, setWind] = useState('');
-
+    const [sunrise, setSunrise] = useState('');
+    const [sunset, setSunset] = useState('');
 
       const handleSubmit = async (event) => {
         event.preventDefault();
@@ -37,6 +39,9 @@ const Form = () => {
           setMax(jsonData.main.temp_max);
           setHumidity(jsonData.main.humidity);
           setWind(jsonData.wind.speed);
+          setSunrise(jsonData.sys.sunrise);
+          setSunset(jsonData.sys.sunset);
+          setIsSubmitted(true);
         } catch (error) {
           console.error(error);
         }
@@ -50,7 +55,7 @@ const Form = () => {
                     value={enteredCity}
                     onChange={(e) => setEnteredCity(e.target.value)} placeholder="e.g. New York" />
             </form>
-            {enteredCity == city ? <Results city={city} country={country} description={description} icon={icon} temperature={temperature} feels={feels} min={min} max={max} humidity={humidity} wind={wind} /> : null}
+            {enteredCity == city ? <Results city={city} country={country} description={description} icon={icon} temperature={temperature} feels={feels} min={min} max={max} humidity={humidity} wind={wind} sunrise={sunrise} sunset={sunset} isSubmitted={isSubmitted}/> : null}
         </>
     )
 }

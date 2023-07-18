@@ -1,7 +1,7 @@
 div.info {
     background-color: rgba(252, 252, 252, 0.05);
     width: 14vw;
-    height: 24vw;
+    height: 30vw;
     margin: 5px;
     margin-top: 50px;
     border-radius: 15px 70px;
@@ -58,4 +58,8 @@ img.images {
 @keyframes setTranslate{
     from {transform: rotateY(90deg);}
     to {transform: rotateY(0deg);}
+}
+
+div.bottomparagraphs p {
+    font-size: 20px;
 }
