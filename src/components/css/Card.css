@@ -1,14 +1,15 @@
 div.info {
     background-color: rgba(252, 252, 252, 0.05);
     width: 14vw;
-    height: 30vw;
+    min-width: 200px;
+    height: 60vh;
     margin: 5px;
     margin-top: 50px;
     border-radius: 15px 70px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     display: flex;
-    justify-content: center;
-    align-items: cetner;
+    justify-content: space-around;
+    align-items: center;
     flex-direction: column;
     transform: rotateY(90deg);
 }
@@ -39,20 +40,31 @@ div.info:nth-child(6) {
 
 p {
     font-weight: bold;
-    align-self: center;
     font-size: 40px;
 }
 
 p.names {
-    font-size: 20px;
+    font-size: 1.1vw;
+    height: 20%;
 }
 
 p.celsius {
-    margin-top: -20px;
+    margin-top: -10px;
 }
 
 img.images {
-    align-self: center;
+    height: 13%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+div.degrees {
+    height: 10%;
+    margin-top: -70px;
+}
+
+div.degrees>p {
+    font-size: 2.2vw;
 }
 
 @keyframes setTranslate{
@@ -61,5 +73,5 @@ img.images {
 }
 
 div.bottomparagraphs p {
-    font-size: 20px;
+    font-size: 1.1vw;
 }

@@ -1,9 +1,9 @@
-import './css/Form.css';
+import './css/App.css';
 import { useState } from 'react';
 import Results from './Results.js';
 
 
-const Form = () => {
+const App = () => {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [enteredCity, setEnteredCity] = useState('');
@@ -60,4 +60,4 @@ const Form = () => {
     )
 }
 
-export default Form;
+export default App;

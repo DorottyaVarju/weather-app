@@ -1,16 +1,18 @@
 h2 {
     display: flex;
     justify-content: center;
-    margin-top: 50px;
     opacity: 0;
     animation: setOpacity 4.5s forwards;
+    height: 5vh;
+    font-size: 1.2vw;
 }
 
 div.results {
     width: 100vw;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    height: 68vh;
 }
 
 div.bottomparagraphs {
@@ -18,11 +20,11 @@ div.bottomparagraphs {
     animation: setOpacity 4.5s forwards;
     color: rgba(60, 92, 130, 0.6);
     font-size: 10px;
-    width: 40%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     width: 100%;
-    margin-top: 100px;
+    height: 10vh;
 }
 
 @keyframes setOpacity{
