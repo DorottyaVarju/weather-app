@@ -11,7 +11,7 @@ div.results {
     width: 100vw;
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     height: 68vh;
 }
 
@@ -27,7 +27,61 @@ div.bottomparagraphs {
     height: 10vh;
 }
 
-@keyframes setOpacity{
-    from {opacity: 0;}
-    to {opacity: 1;}
+#weatherIcon {
+    height: 40px;
+    margin-top: -5px;
+}
+
+@keyframes setOpacity {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    h2 {
+        font-size: 1.4vw;
+    }
+
+    div.bottomparagraphs {
+        font-size: 16px;
+    }
+
+    #weatherIcon {
+        height: 30px;
+        margin-top: -7px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    h2 {
+        font-size: 1.6vw;
+    }
+
+    div.bottomparagraphs {
+        font-size: 18px;
+    }
+
+    #weatherIcon {
+        height: 25px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    h2 {
+        font-size: 2.2vw;
+    }
+
+    div.bottomparagraphs {
+        font-size: 30px;
+    }
+
+    #weatherIcon {
+        height: 20px;
+        margin-top: -5px;
+    }
 }

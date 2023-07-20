@@ -1,12 +1,13 @@
 div.info {
     background-color: rgba(252, 252, 252, 0.05);
     width: 14vw;
-    min-width: 200px;
-    height: 60vh;
+    min-width: 110px;
+    height: 30vw;
+    min-height: 190px;
     margin: 5px;
     margin-top: 50px;
     border-radius: 15px 70px;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -67,11 +68,64 @@ div.degrees>p {
     font-size: 2.2vw;
 }
 
-@keyframes setTranslate{
-    from {transform: rotateY(90deg);}
-    to {transform: rotateY(0deg);}
+@keyframes setTranslate {
+    from {
+        transform: rotateY(90deg);
+    }
+
+    to {
+        transform: rotateY(0deg);
+    }
 }
 
 div.bottomparagraphs p {
     font-size: 1.1vw;
+}
+
+@media only screen and (max-width: 992px) {
+    div.info {
+        width: 20vw;
+        height: 29vw;
+        border-radius: 11px 66px;
+    }
+
+    p.celsius {
+        margin-top: 0px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    div.info {
+        width: 22vw;
+        height: 35vw;
+        border-radius: 10px 65px;
+    }
+
+    div.degrees {
+        margin-top: -50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    div.info {
+        width: 24vw;
+        height: 37vw;
+        border-radius: 8px 50px;
+    }
+
+    div.degrees {
+        margin-top: -40px;
+    }
+
+    p.names {
+        font-size: 2vw;
+    }
+
+    div.degrees>p {
+        font-size: 3.5vw;
+    }
+
+    div.bottomparagraphs p {
+        font-size: 1.8vw;
+    }
 }
