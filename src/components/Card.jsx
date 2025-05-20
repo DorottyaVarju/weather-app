@@ -1,7 +1,8 @@
-const Card = ({data}) => {
+const Card = ({data, unit, parameterName}) => {
     return (
-        <div>
-            {data}
+        <div className="card">
+            <p>{parameterName}</p>
+            <p>{data} {unit}</p>
         </div>
     )
 }
