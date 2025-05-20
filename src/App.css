@@ -32,3 +32,8 @@ input {
     border-radius: 20px;
     padding-block: 5%;
 }
+
+.temperature, .feels_like, .humidity, .windspeed {
+    font-size: 2rem;
+    color: lightblue;
+}
