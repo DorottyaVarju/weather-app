@@ -1,7 +1,7 @@
 const Search = ({ search, handleSearch }) => {
     return (
         <div>
-            <p>Search for a city:</p> <input value={search} onChange={handleSearch} autoFocus/>
+            <p className="bigger-text">Search for a city:</p> <input className="bigger-text" value={search} onChange={handleSearch} autoFocus/>
         </div>
     )
 }
