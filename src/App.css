@@ -3,14 +3,29 @@
 }
 
 html {
-    min-height: 100vh;
+    min-block-size: 100vh;
 }
 
 body {
     background-image: linear-gradient(#FEFEFE, #BDE0FE);
-    min-height: 100%;
+    min-block-size: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: #4361ee;
+    margin: 0;
+}
+
+.sunny-background {
+    background-image: linear-gradient(#fcfc99,  #BDE0FE);
+}
+
+#root {
+    min-block-size: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1
 }
 
 div {
@@ -19,6 +34,18 @@ div {
 
 h1 {
     font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+h3 {
+    color: #8b66f9;
+    text-align: start;
+    font-size: 1rem;
+    padding-inline-start: 1rem;
+    font-weight: normal;
 }
 
 input {
@@ -49,11 +76,16 @@ input {
 .sum-container {
     padding: 1rem;
     box-shadow: 3px 3px 10px 0px #a3bdfb;
-    background-color: #c1d3fe33;
+    background-color: #5580e733;
     border-radius: 1rem;
     margin-inline: auto;
     margin-block-start: 1rem;
     max-inline-size: 300px;
+}
+
+.sunny-background .sum-container {
+    box-shadow: 3px 3px 10px 0px #969615a9;
+    background-color: #fcfc9933;
 }
 
 .card-container {
@@ -76,8 +108,11 @@ input {
     min-width: 100px;
     padding-block-start: 1rem;
     box-shadow: 3px 3px 10px 0px #a3bdfb;
-    /* background-color: #c1d3fe33; */
     border-radius: 1rem;
+}
+
+.card img {
+    width: 50px;
 }
 
 .scroll-container {
@@ -86,26 +121,58 @@ input {
 
 .scroll-fade-left,
 .scroll-fade-right {
-  position: absolute;
-  top: 0;
-  width: 25px;
-  height: 100%;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
 .scroll-fade-left {
-  left: 0;
-  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+    left: 0;
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
 }
 
 .scroll-fade-right {
-  right: 0;
-  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+    right: 0;
+    background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
 }
 
 .weather-element-icon {
     font-size: 2rem;
     color: #a688ff;
+}
+
+.icon-container {
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    margin: 0;
+    background: #4361ee33;
+    color: white;
+    padding: 1rem;
+    font-size: 0.75rem;
+}
+
+a {
+    color: white;
+}
+
+a:visited {
+    color: #8f74e1;
+}
+
+a:hover,
+a:focus-visible {
+    color: #a688ff;
+}
+
+a:active {
+    color: #4361ee;
 }
