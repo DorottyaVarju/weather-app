@@ -11,7 +11,7 @@ const App = () => {
   const [weather, setWeather] = useState(null)
   const [forecast, setForecast] = useState(null)
   const [search, setSearch] = useState('')
-   const [renderedForecastItem, setRenderedForecastItem] = useState('')
+  const [renderedForecastItem, setRenderedForecastItem] = useState('')
 
   const optionsDate = {
     weekday: 'short',
@@ -97,11 +97,16 @@ const App = () => {
         )}
         {forecast !== null && (
           <>
+            <hr className="main-hr" />
             <h2>Forecast</h2>
             <ScrollFade weather={renderedForecastItem[0]} date={dates[1]} isForecast={true} />
+            <hr />
             <ScrollFade weather={renderedForecastItem[1]} date={dates[2]} isForecast={true} />
+            <hr />
             <ScrollFade weather={renderedForecastItem[2]} date={dates[3]} isForecast={true} />
+            <hr />
             <ScrollFade weather={renderedForecastItem[3]} date={dates[4]} isForecast={true} />
+            <hr />
             <ScrollFade weather={renderedForecastItem[4]} date={dates[5]} isForecast={true} />
           </>
         )}

@@ -10,12 +10,12 @@ body {
     background-image: linear-gradient(#FEFEFE, #BDE0FE);
     min-block-size: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    color: #4361ee;
+    color: #4c76d8;
     margin: 0;
 }
 
 .sunny-background {
-    background-image: linear-gradient(#fcfc99,  #BDE0FE);
+    background-image: linear-gradient(#fcfc99, #BDE0FE);
 }
 
 #root {
@@ -48,9 +48,20 @@ h3 {
     font-weight: normal;
 }
 
+hr {
+    border: 1px solid #5580e733;
+    border-radius: 20px;
+    inline-size: 70%;
+}
+
+.main-hr {
+    border-width: 2px;
+    inline-size: 90%;
+}
+
 input {
     border: none;
-    border-block-end: 2px solid #4361ee;
+    border-block-end: 2px solid #a688ff;
     outline: none;
     background: transparent;
     text-align: center;
@@ -75,12 +86,9 @@ input {
 
 .sum-container {
     padding: 1rem;
-    box-shadow: 3px 3px 10px 0px #a3bdfb;
     background-color: #5580e733;
-    border-radius: 1rem;
     margin-inline: auto;
     margin-block-start: 1rem;
-    max-inline-size: 300px;
 }
 
 .sunny-background .sum-container {
@@ -105,7 +113,8 @@ input {
 
 .card {
     flex: 1 1 calc(20% - 10px);
-    min-width: 100px;
+    min-inline-size: 100px;
+    max-inline-size: 300px;
     padding-block-start: 1rem;
     box-shadow: 3px 3px 10px 0px #a3bdfb;
     border-radius: 1rem;
@@ -124,7 +133,7 @@ input {
     position: absolute;
     top: 0;
     width: 25px;
-    height: 100%;
+    block-size: 100%;
     pointer-events: none;
     transition: opacity 0.3s ease;
     z-index: 1;
@@ -146,7 +155,7 @@ input {
 }
 
 .icon-container {
-    height: 2.5rem;
+    block-size: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -175,4 +184,48 @@ a:focus-visible {
 
 a:active {
     color: #4361ee;
+}
+
+@media (min-width: 1024px) {
+    .card-container {
+        flex-wrap: wrap;
+        padding-inline: 5rem;
+        justify-content: center;
+    }
+
+    /* .scroll-container:nth-of-type(4) .card:first-child {
+        background-color: red;
+    } */
+
+    .scroll-container:nth-of-type(3) .card {
+        flex: 1 1 calc(20% - 10px);
+    }
+
+    /* .icon-container {
+        block-size: 3rem;
+    } */
+
+    .weather-element-icon {
+        font-size: 2.3rem;
+    }
+
+    .smaller-text {
+        font-size: 1rem;
+    }
+
+    .bigger-text {
+        font-size: 1.4rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        padding-inline-start: 5rem;
+    }
+
+    footer {
+        font-size: 1rem;
+    }
 }
