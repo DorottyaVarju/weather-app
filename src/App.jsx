@@ -48,7 +48,7 @@ const App = () => {
           let formatted
           if (rawWeather !== null) {
             formatted = weatherService.formatFetchedData(rawWeather)
-            weatherService.setBodyBackground(formatted)
+            weatherService.setBodyBackground(formatted, 'sunny-background')
           } else {
             formatted = null
           }
@@ -99,15 +99,15 @@ const App = () => {
           <>
             <hr className="main-hr" />
             <h2>Forecast</h2>
-            <ScrollFade weather={renderedForecastItem[0]} date={dates[1]} isForecast={true} />
+            <ScrollFade weather={renderedForecastItem[0]} date={dates[1]} isForecast={true} city={search} />
             <hr />
-            <ScrollFade weather={renderedForecastItem[1]} date={dates[2]} isForecast={true} />
+            <ScrollFade weather={renderedForecastItem[1]} date={dates[2]} isForecast={true}  city={search} />
             <hr />
-            <ScrollFade weather={renderedForecastItem[2]} date={dates[3]} isForecast={true} />
+            <ScrollFade weather={renderedForecastItem[2]} date={dates[3]} isForecast={true}  city={search} />
             <hr />
-            <ScrollFade weather={renderedForecastItem[3]} date={dates[4]} isForecast={true} />
+            <ScrollFade weather={renderedForecastItem[3]} date={dates[4]} isForecast={true}  city={search} />
             <hr />
-            <ScrollFade weather={renderedForecastItem[4]} date={dates[5]} isForecast={true} />
+            <ScrollFade weather={renderedForecastItem[4]} date={dates[5]} isForecast={true}  city={search} />
           </>
         )}
       </main>

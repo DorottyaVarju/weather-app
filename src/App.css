@@ -15,7 +15,7 @@ body {
 }
 
 .sunny-background {
-    background-image: linear-gradient(#fcfc99, #BDE0FE);
+    background-image: linear-gradient(#f5f54330, #BDE0FE);
 }
 
 #root {
@@ -54,6 +54,12 @@ hr {
     inline-size: 70%;
 }
 
+.purple-start-text {
+    color: #8b66f9;
+    text-align: start;
+    padding-inline-start: 1rem;
+}
+
 .main-hr {
     border-width: 2px;
     inline-size: 90%;
@@ -89,6 +95,24 @@ input {
     background-color: #5580e733;
     margin-inline: auto;
     margin-block-start: 1rem;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFFBF;
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
 }
 
 .sunny-background .sum-container {
@@ -111,18 +135,49 @@ input {
     display: none;
 }
 
-.card {
+.card,
+.card-overlay {
     flex: 1 1 calc(20% - 10px);
     min-inline-size: 100px;
     max-inline-size: 300px;
     padding-block-start: 1rem;
     box-shadow: 3px 3px 10px 0px #a3bdfb;
     border-radius: 1rem;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFFBF;
+    z-index: 1;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
 }
 
 .card img {
     width: 50px;
 }
+
+img {
+    box-shadow: 3px 3px 10px 0px #a3bdfb;
+    border-radius: 50%;
+    background-color: #4361ee33;
+}
+
+.sum-container .content img {
+    margin-block-start: 0.5rem;
+}
+
+
 
 .scroll-container {
     position: relative;
@@ -221,7 +276,8 @@ a:active {
         font-size: 2rem;
     }
 
-    h3 {
+    h3,
+    h3>p {
         padding-inline-start: 5rem;
     }
 
