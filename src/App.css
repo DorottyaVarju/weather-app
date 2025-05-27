@@ -43,31 +43,48 @@ body {
     color: rgb(205, 157, 68);
 }
 
+.sunny-warm-theme .card,
+.sunny-warm-theme .card-overlay {
+    box-shadow: 3px 3px 10px 0px rgb(254 196 87 / 52%);
+}
+
+.sunny-warm-theme hr {
+    border-color: rgb(254 196 87 / 39%)
+}
+
 .sunny-warm-theme h3,
 .sunny-warm-theme footer,
 .sunny-theme h3 {
     color: rgb(205, 157, 68);
 }
 
-.sunny-warm-theme a {
+.sunny-theme input {
+    border-block-end-color: #7d98d5;
+    color: #7d98d5;
+}
+
+.sunny-warm-theme a, .sunny-theme a {
     color: rgb(212, 149, 31)
 }
 
 .sunny-warm-theme a:visited,
-.sunny-warm-theme a:focus-visible {
+.sunny-warm-theme a:focus-visible,
+.sunny-theme a:visited,
+.sunny-theme a:focus-visible {
     color: rgb(167, 118, 27)
 }
 
-.sunny-warm-theme a:hover {
+.sunny-warm-theme a:hover, .sunny-theme a:hover {
     color: rgb(140, 104, 37)
 }
 
-.sunny-warm-theme a:active {
+.sunny-warm-theme a:active, .sunny-theme a:active {
     color: rgb(229, 168, 55)
 }
 
-.sunny-warm-theme footer {
-    background-color: rgb(250, 206, 126);
+.sunny-warm-theme footer, .sunny-theme footer {
+    color: rgb(140, 104, 37);
+    background-color: #a4c3f154;
 }
 
 .night-theme {
@@ -243,8 +260,6 @@ img {
 .sum-container .content img {
     margin-block-start: 0.5rem;
 }
-
-
 
 .scroll-container {
     position: relative;
