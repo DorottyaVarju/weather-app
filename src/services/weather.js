@@ -99,13 +99,23 @@ const setRenderedForecastItems = ((forecast) => {
     return renderedForecastItems
 })
 
-const setBodyBackground = ((weather, className) => {
-    if (weather.icon === '01d' || weather.icon === '02d' || weather.icon === '10d') {
-        document.body.classList.add(className)
-    } else {
-        document.body.classList.remove(className)
+const setBodyBackground = (icon, temperature) => {
+    const isNight = icon.includes('n')
+    const isSunny = ['01d', '02d', '10d'].includes(icon)
+    const isWarm = ((temperature > 24) ? true : false)
+    const isBetween10and25 = ((temperature > 10 && temperature < 25) ? true : false)
+    document.body.classList.remove('night-theme', 'sunny-theme', 'sunny-warm-theme', 'between-10-and-25-theme')
+
+    if (isNight) {
+        document.body.classList.add('night-theme')
+    } else if (isSunny && isWarm) {
+        document.body.classList.add('sunny-warm-theme')
+    } else if(isSunny){
+        document.body.classList.add('sunny-theme')
+    } else if(isBetween10and25) {
+        document.body.classList.add('between-10-and-25-theme')
     }
-})
+};
 
 const setContainerBackground = ((icon) => {
     let backgroundImg, backgroundPosition

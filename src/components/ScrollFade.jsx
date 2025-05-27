@@ -12,6 +12,12 @@ const ScrollFade = ({ weather, date, isForecast, city }) => {
     const [showLeftFade, setShowLeftFade] = useState(false)
     const [showRightFade, setShowRightFade] = useState(false)
     const weatherElementIconClass = 'weather-element-icon'
+    const containerStyle = weatherService.setContainerBackground(weather.icon);
+    let classNameForCardContainer = 'card-container'
+
+    if (isForecast) {
+        classNameForCardContainer += ' forecast-card-container'
+    }
 
     useEffect(() => {
         const container = containerRef.current
@@ -33,13 +39,11 @@ const ScrollFade = ({ weather, date, isForecast, city }) => {
         }
     }, [])
 
-    const containerStyle = weatherService.setContainerBackground(weather.icon);
-
     return (
         <>
             {isForecast && <h3 className="no-margin-block-end">{date}, 12:00 <br />{city}</h3>}
             <div className="scroll-container" id="scrollContainer">
-                <div className="card-container" ref={containerRef}>
+                <div className={classNameForCardContainer} ref={containerRef}>
                     {isForecast && <Card data={weather.temperature} unit="°C" parameterName={weather.name} containerStyle={containerStyle} hasImg={true} icon={<img
                         src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
                         alt={`${weather.description}`}

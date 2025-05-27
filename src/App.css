@@ -14,8 +14,75 @@ body {
     margin: 0;
 }
 
-.sunny-background {
-    background-image: linear-gradient(#f5f54330, #BDE0FE);
+.between-10-and-25-theme .weather-element-icon {
+    color: #4c76d8;
+}
+
+.between-10-and-25-theme input {
+    border-block-end-color: #456bc5;
+    color: #3e62b6;
+}
+
+.between-10-and-25-theme h3,
+.between-10-and-25-theme footer {
+    color: #3e62b6;
+}
+
+.sunny-warm-theme {
+    background-image: linear-gradient(#f5f54330, #cbb43149);
+    color: rgb(212, 149, 31)
+}
+
+.sunny-warm-theme .weather-element-icon,
+.sunny-theme .weather-element-icon {
+    color: rgb(254, 196, 87);
+}
+
+.sunny-warm-theme input {
+    border-block-end-color: rgb(205, 157, 68);
+    color: rgb(205, 157, 68);
+}
+
+.sunny-warm-theme h3,
+.sunny-warm-theme footer,
+.sunny-theme h3 {
+    color: rgb(205, 157, 68);
+}
+
+.sunny-warm-theme a {
+    color: rgb(212, 149, 31)
+}
+
+.sunny-warm-theme a:visited,
+.sunny-warm-theme a:focus-visible {
+    color: rgb(167, 118, 27)
+}
+
+.sunny-warm-theme a:hover {
+    color: rgb(140, 104, 37)
+}
+
+.sunny-warm-theme a:active {
+    color: rgb(229, 168, 55)
+}
+
+.sunny-warm-theme footer {
+    background-color: rgb(250, 206, 126);
+}
+
+.night-theme {
+    background-image: linear-gradient(#2650b2, #0c1c40);
+    color: #cddcff;
+}
+
+.night-theme .overlay,
+.night-theme .card-overlay {
+    background-color: #2c2b2b6a;
+}
+
+.night-theme input {
+    border-block-end-color: #d9e3fc;
+    color: #d9e3fc;
 }
 
 #root {
@@ -243,22 +310,33 @@ a:active {
 
 @media (min-width: 1024px) {
     .card-container {
-        flex-wrap: wrap;
-        padding-inline: 5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        padding-inline: 10rem;
         justify-content: center;
     }
-
-    /* .scroll-container:nth-of-type(4) .card:first-child {
-        background-color: red;
-    } */
 
     .scroll-container:nth-of-type(3) .card {
         flex: 1 1 calc(20% - 10px);
     }
 
-    /* .icon-container {
-        block-size: 3rem;
-    } */
+    .forecast-card-container .card:first-child {
+        grid-row: span 2;
+    }
+
+    .forecast-card-container .card:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card:first-child img {
+        inline-size: 100px;
+    }
+
+    .forecast-card-container .card:first-child .icon-container {
+        block-size: 100px;
+    }
 
     .weather-element-icon {
         font-size: 2.3rem;
