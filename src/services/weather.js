@@ -1,20 +1,20 @@
 import axios from 'axios'
-import clearImg from '../../public/images/clear.jpg'
-import cloudsImg from '../../public/images/clouds.jpg'
-import fewCloudsImg from '../../public/images/few_clouds.jpg'
-import mistImg from '../../public/images/mist.jpg'
-import rainyImg from '../../public/images/rainy.jpg'
-import scatteredCloudsImg from '../../public/images/scattered_clouds.jpg'
-import snowyImg from '../../public/images/snowy.jpg'
-import stormImg from '../../public/images/storm.jpg'
-import clearImgN from '../../public/images/clear_n.jpg'
-import cloudsImgN from '../../public/images/clouds_n.jpg'
-import fewCloudsImgN from '../../public/images/few_clouds_n.jpg'
-import mistImgN from '../../public/images/mist_n.jpg'
-import rainyImgN from '../../public/images/rainy.jpg'
-import scatteredCloudsImgN from '../../public/images/scattered_clouds_n.jpg'
-import snowyImgN from '../../public/images/snowy_n.jpg'
-import stormImgN from '../../public/images/storm_n.jpg'
+import clearImg from '../../src/images/clear.jpg'
+import cloudsImg from '../../src/images/clouds.jpg'
+import fewCloudsImg from '../../src/images/few_clouds.jpg'
+import mistImg from '../../src/images/mist.jpg'
+import rainyImg from '../../src/images/rainy.jpg'
+import scatteredCloudsImg from '../../src/images/scattered_clouds.jpg'
+import snowyImg from '../../src/images/snowy.jpg'
+import stormImg from '../../src/images/storm.jpg'
+import clearImgN from '../../src/images/clear_n.jpg'
+import cloudsImgN from '../../src/images/clouds_n.jpg'
+import fewCloudsImgN from '../../src/images/few_clouds_n.jpg'
+import mistImgN from '../../src/images/mist_n.jpg'
+import rainyImgN from '../../src/images/rainy.jpg'
+import scatteredCloudsImgN from '../../src/images/scattered_clouds_n.jpg'
+import snowyImgN from '../../src/images/snowy_n.jpg'
+import stormImgN from '../../src/images/storm_n.jpg'
 
 const apiKey = import.meta.env.VITE_WEATHER_KEY
 const baseUrlWeather = 'https://api.openweathermap.org/data/2.5/weather'
@@ -76,12 +76,13 @@ const formatFetchedData = ((raw) => {
             cloudiness: formatArray(item => item.clouds.all),
             visibility: formatArray(item => item.visibility / 1000),
             description: formatArray(item => item.weather[0]?.description ?? ''),
-            icon: formatArray(item => item.weather[0]?.icon ?? '')
+            icon: formatArray(item => item.weather[0]?.icon ?? ''),
+            time: formatArray(item => item.dt_txt ?? '')
         }
     }
 })
 
-const setRenderedForecastItems = ((forecast) => {
+const getRenderedForecastItems = ((forecast) => {
     const renderedForecastItems = forecast.temperature.map((_, i) => ({
         name: forecast.name[i],
         temperature: forecast.temperature[i],
@@ -95,9 +96,62 @@ const setRenderedForecastItems = ((forecast) => {
         description: forecast.description[i],
         icon: forecast.icon[i]
     }))
-
     return renderedForecastItems
 })
+
+const getAllForecastItemsByDaysAndHours = ((forecast) => {
+    const result = {}
+    const startTime = new Date(forecast.time[0].replace(" ", "T"))
+
+    for (let index = 0; index < forecast.name.length; index++) {
+        const currentTime = new Date(startTime.getTime() + index * 3 * 60 * 60 * 1000)
+        const day = currentTime.toISOString().slice(0, 10)
+        const hour = currentTime.toISOString().slice(11, 16)
+
+        if (!result[day]) {
+            result[day] = {}
+        }
+
+        result[day][hour] = {
+            name: forecast.name[index],
+            temperature: forecast.temperature[index],
+            feelsLike: forecast.feelsLike[index],
+            pressure: forecast.pressure[index],
+            humidity: forecast.humidity[index],
+            cloudiness: forecast.cloudiness[index] ?? 43,
+            description: forecast.description[index] ?? "scattered clouds",
+            icon: forecast.icon[index] ?? "03d",
+            visibility: forecast.visibility[index] ?? 10,
+            windDeg: forecast.windDeg[index] ?? 0,
+            windSpeed: forecast.windSpeed[index] ?? 0,
+        }
+    }
+
+    return result
+})
+
+const getDataForChart = (dateStr, chartData) => {
+    const selectedDate = new Date(dateStr)
+
+    const year = selectedDate.getFullYear()
+    const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
+    const day = String(selectedDate.getDate()).padStart(2, '0')
+
+    const isoDate = `${year}-${month}-${day}`
+    const rawData = chartData[isoDate]
+
+    console.log(dateStr)
+    console.log(rawData)
+
+    const dataForChart = Object.entries(rawData).map(([hour, values]) => ({
+        hour,
+        temperature: values.temperature,
+        humidity: values.humidity,
+        windSpeed: values.windSpeed
+    }))
+
+    return dataForChart
+}
 
 const setBodyBackground = (icon, temperature) => {
     const isNight = icon.includes('n')
@@ -110,12 +164,12 @@ const setBodyBackground = (icon, temperature) => {
         document.body.classList.add('night-theme')
     } else if (isSunny && isWarm) {
         document.body.classList.add('sunny-warm-theme')
-    } else if(isSunny){
+    } else if (isSunny) {
         document.body.classList.add('sunny-theme')
-    } else if(isBetween10and25) {
+    } else if (isBetween10and25) {
         document.body.classList.add('between-10-and-25-theme')
     }
-};
+}
 
 const setContainerBackground = ((icon) => {
     let backgroundImg, backgroundPosition
@@ -168,4 +222,4 @@ const setContainerBackground = ((icon) => {
     return containerBackground
 })
 
-export default { getWeather, getForecast, formatFetchedData, setRenderedForecastItems, setBodyBackground, setContainerBackground }
+export default { getWeather, getForecast, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }
