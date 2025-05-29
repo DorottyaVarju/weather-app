@@ -59,7 +59,7 @@ const App = () => {
         })
     }
   }, [search])
-  console.log(forecast)
+
   const handleSearch = (event) => {
     setSearch(event.target.value)
   }
