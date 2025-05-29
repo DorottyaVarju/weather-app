@@ -88,7 +88,7 @@ const App = () => {
   const handleSearch = (event) => {
     setSearch(event.target.value)
   }
- 
+ console.log(chartData)
   return (
     <>
       <main>
@@ -105,7 +105,7 @@ const App = () => {
           <>
             <hr className="main-hr" />
             <h2>Forecast For Today</h2>
-             <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(', ').slice(0, 2).join(', ')} />
+            <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(', ').slice(0, 2).join(', ')} />
             <hr className="main-hr" />
             <h2>Forecast</h2>
             <ScrollFade weather={dailyForecastItem[0]} date={dates[1]} isForecast={true} city={search} />

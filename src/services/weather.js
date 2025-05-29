@@ -130,25 +130,40 @@ const getAllForecastItemsByDaysAndHours = ((forecast) => {
     return result
 })
 
-const getDataForChart = (dateStr, chartData) => {
-    const selectedDate = new Date(dateStr)
-
-    const year = selectedDate.getFullYear()
-    const month = String(selectedDate.getMonth() + 1).padStart(2, '0')
-    const day = String(selectedDate.getDate()).padStart(2, '0')
+const getIsoDate = (date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
 
     const isoDate = `${year}-${month}-${day}`
-    const rawData = chartData[isoDate]
 
-    console.log(dateStr)
-    console.log(rawData)
+    return isoDate
+}
 
-    const dataForChart = Object.entries(rawData).map(([hour, values]) => ({
-        hour,
-        temperature: values.temperature,
-        humidity: values.humidity,
-        windSpeed: values.windSpeed
-    }))
+const getDataForChart = (dateStr, chartData) => {
+    const now = new Date()
+    const isoDateNow = getIsoDate(now)
+    const timeNow = now.toTimeString().slice(0, 5)
+
+    const selectedDate = new Date(dateStr)
+    const isoDateSelectedDate = getIsoDate(selectedDate)
+
+    const rawData = chartData[isoDateSelectedDate]
+
+    const dataForChart = Object.entries(rawData)
+        .map(([hour, values]) => {
+            if ((isoDateNow === isoDateSelectedDate && timeNow < hour || isoDateNow !== isoDateSelectedDate)) {
+                return {
+                    hour: hour,
+                    temperature: values.temperature,
+                    humidity: values.humidity,
+                    windSpeed: values.windSpeed
+                };
+            } else {
+                return null
+            }
+        })
+        .filter(entry => entry !== null)
 
     return dataForChart
 }
