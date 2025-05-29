@@ -79,10 +79,10 @@ const App = () => {
         {forecast !== null && (
           <>
             <hr className="main-hr" />
-            <h2>Forecast For Today</h2>
+            <h2>Forecast For The Rest Of The Day</h2>
             <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(', ').slice(0, 2).join(', ')} />
             <hr className="main-hr" />
-            <h2>Forecast</h2>
+            <h2>Forecast For The Next Few Days</h2>
             <ScrollFade weather={dailyForecastItem[0]} date={dates[1]} isForecast={true} city={search} />
             <LineChart data={weatherService.getDataForChart(dates[1], chartData)} date={dates[1]} />
             <hr />
