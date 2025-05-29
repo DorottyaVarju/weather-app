@@ -47,18 +47,18 @@ const ScrollFade = ({ weather, date, isForecast, city }) => {
                     {isForecast && <Card data={weather.temperature} unit="°C" parameterName={weather.name} containerStyle={containerStyle} hasImg={true} icon={<img
                         src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`}
                         alt={`${weather.description}`}
-                    />} />}
-                    <Card data={weather.temperature} unit="°C" parameterName="Temperature" icon={<FaTemperatureHalf className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.feelsLike} unit="°C" parameterName="Feels like" icon={<BsPersonFill className={weatherElementIconClass} />} hasImg={false} />
-                    {isForecast && <Card data={weather.pop} unit="%" parameterName="POP" icon={<FaCloudRain className={weatherElementIconClass} />} hasImg={false} />}
-                    <Card data={weather.humidity} unit="%" parameterName="Humidity" icon={<FaDroplet className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.windSpeed} unit="m/s" parameterName="Windspeed" icon={<FiWind className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.windDeg} unit="°" parameterName="Wind direction" icon={<TiWeatherWindy className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.pressure} unit="hPa" parameterName="Air pressure" icon={<CgCompress className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.cloudiness} unit="%" parameterName="Cloud cover" icon={<FaCloud className={weatherElementIconClass} />} hasImg={false} />
-                    <Card data={weather.visibility} unit="km" parameterName="Visibility" icon={<FaEye className={weatherElementIconClass} />} hasImg={false} />
-                    {weather.sunrise && <Card data={weather.sunrise} unit="" parameterName="Sunrise" icon={<FiSunrise className={weatherElementIconClass} />} hasImg={false} />}
-                    {weather.sunset && <Card data={weather.sunset} unit="" parameterName="Sunset" icon={<FiSunset className={weatherElementIconClass} />} hasImg={false} />}
+                    />} addition='' />}
+                    <Card data={weather.temperature} unit="°C" parameterName="Temperature" icon={<FaTemperatureHalf className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    <Card data={weather.feelsLike} unit="°C" parameterName="Feels like" icon={<BsPersonFill className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    {isForecast && <Card data={weather.pop} unit="%" parameterName="POP" icon={<FaCloudRain className={weatherElementIconClass} />} hasImg={false} addition='' />}
+                    <Card data={weather.humidity} unit="%" parameterName="Humidity" icon={<FaDroplet className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    <Card data={weather.windSpeed} unit="m/s" parameterName="Windspeed" icon={<FiWind className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    <Card data={weather.windDegText} unit="" parameterName="Wind direction" icon={<TiWeatherWindy className={weatherElementIconClass} />} hasImg={false} addition={`(${weather.windDeg})°`} />
+                    <Card data={weather.pressure} unit="hPa" parameterName="Air pressure" icon={<CgCompress className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    <Card data={weather.cloudiness} unit="%" parameterName="Cloud cover" icon={<FaCloud className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    <Card data={weather.visibility} unit="km" parameterName="Visibility" icon={<FaEye className={weatherElementIconClass} />} hasImg={false} addition='' />
+                    {weather.sunrise && <Card data={weather.sunrise} unit="" parameterName="Sunrise" icon={<FiSunrise className={weatherElementIconClass} />} hasImg={false} addition='' />}
+                    {weather.sunset && <Card data={weather.sunset} unit="" parameterName="Sunset" icon={<FiSunset className={weatherElementIconClass} />} hasImg={false} addition='' />}
                 </div>
                 {showLeftFade && <div className="scroll-fade-left" />}
                 {showRightFade && <div className="scroll-fade-right" />}

@@ -64,11 +64,33 @@ const getDates = () => {
     return dates
 }
 
+const getWindDirectionText = (deg) => {
+    if (deg > 0 && deg < 45) {
+        return 'NE'
+    } else if (deg >= 45 && deg < 90) {
+        return 'E'
+    } else if (deg >= 90 && deg < 135) {
+        return 'SE'
+    } else if (deg >= 135 && deg < 180) {
+        return 'S'
+    } else if (deg >= 180 && deg < 225) {
+        return 'SW'
+    } else if (deg >= 225 && deg < 270) {
+        return 'W'
+    } else if (deg >= 270 && deg < 315) {
+        return 'NW'
+    } else {
+        return 'NW'
+    }
+}
+
 const formatFetchedData = ((raw) => {
     const isCurrent = 'coord' in raw
+    let windDegText
 
     if (isCurrent) {
         const { main, wind, clouds, visibility, weather, sys, name } = raw
+
         return {
             ...raw,
             temperature: Math.round(main.temp - 273.15),
@@ -77,6 +99,7 @@ const formatFetchedData = ((raw) => {
             humidity: main.humidity,
             windSpeed: wind.speed,
             windDeg: wind.deg,
+            windDegText: getWindDirectionText(wind.deg),
             cloudiness: clouds.all,
             visibility: visibility / 1000,
             description: weather[0]?.description ?? '',
@@ -103,6 +126,7 @@ const formatFetchedData = ((raw) => {
             humidity: formatArray(item => item.main.humidity),
             windSpeed: formatArray(item => item.wind.speed),
             windDeg: formatArray(item => item.wind.deg),
+            windDegText: raw.map(item => getWindDirectionText(item.wind.deg)),
             cloudiness: formatArray(item => item.clouds.all),
             visibility: formatArray(item => item.visibility / 1000),
             description: formatArray(item => item.weather[0]?.description ?? ''),
@@ -122,6 +146,7 @@ const getRenderedForecastItems = ((forecast) => {
         humidity: forecast.humidity[i],
         windSpeed: forecast.windSpeed[i],
         windDeg: forecast.windDeg[i],
+        windDegText: forecast.windDegText[i],
         cloudiness: forecast.cloudiness[i],
         visibility: forecast.visibility[i],
         description: forecast.description[i],
