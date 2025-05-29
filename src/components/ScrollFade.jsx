@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import weatherService from '../services/weather'
 import Card from './Card'
-import { FaDroplet, FaTemperatureHalf, FaCloud, FaEye } from "react-icons/fa6"
+import { FaDroplet, FaTemperatureHalf, FaCloud, FaEye, FaCloudRain } from "react-icons/fa6"
 import { BsPersonFill } from "react-icons/bs"
 import { FiWind, FiSunrise, FiSunset } from "react-icons/fi"
 import { CgCompress } from "react-icons/cg"
@@ -50,6 +50,7 @@ const ScrollFade = ({ weather, date, isForecast, city }) => {
                     />} />}
                     <Card data={weather.temperature} unit="°C" parameterName="Temperature" icon={<FaTemperatureHalf className={weatherElementIconClass} />} hasImg={false} />
                     <Card data={weather.feelsLike} unit="°C" parameterName="Feels like" icon={<BsPersonFill className={weatherElementIconClass} />} hasImg={false} />
+                    {isForecast && <Card data={weather.pop} unit="%" parameterName="POP" icon={<FaCloudRain className={weatherElementIconClass} />} hasImg={false} />}
                     <Card data={weather.humidity} unit="%" parameterName="Humidity" icon={<FaDroplet className={weatherElementIconClass} />} hasImg={false} />
                     <Card data={weather.windSpeed} unit="m/s" parameterName="Windspeed" icon={<FiWind className={weatherElementIconClass} />} hasImg={false} />
                     <Card data={weather.windDeg} unit="°" parameterName="Wind direction" icon={<TiWeatherWindy className={weatherElementIconClass} />} hasImg={false} />

@@ -33,12 +33,42 @@ const getWeather = (place) => getData(place, baseUrlWeather)
 
 const getForecast = (place) => getData(place, baseUrlForecast)
 
+
+const getDates = () => {
+    const optionsDate = {
+        weekday: 'short',
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    }
+
+    const optionsDateTime = {
+        ...optionsDate,
+        hour: '2-digit',
+        minute: '2-digit'
+    }
+
+    const dates = []
+
+    for (let i = 0; i < 6; i++) {
+        const date = new Date()
+        date.setDate(date.getDate() + i)
+
+        const formatted = i === 0
+            ? date.toLocaleString('en-GB', optionsDateTime)
+            : date.toLocaleDateString('en-GB', optionsDate)
+
+        dates.push(formatted)
+    }
+
+    return dates
+}
+
 const formatFetchedData = ((raw) => {
     const isCurrent = 'coord' in raw
 
     if (isCurrent) {
         const { main, wind, clouds, visibility, weather, sys, name } = raw
-
         return {
             ...raw,
             temperature: Math.round(main.temp - 273.15),
@@ -77,7 +107,8 @@ const formatFetchedData = ((raw) => {
             visibility: formatArray(item => item.visibility / 1000),
             description: formatArray(item => item.weather[0]?.description ?? ''),
             icon: formatArray(item => item.weather[0]?.icon ?? ''),
-            time: formatArray(item => item.dt_txt ?? '')
+            time: formatArray(item => item.dt_txt ?? ''),
+            pop: formatArray(item => item.pop * 100 ?? '')
         }
     }
 })
@@ -94,7 +125,8 @@ const getRenderedForecastItems = ((forecast) => {
         cloudiness: forecast.cloudiness[i],
         visibility: forecast.visibility[i],
         description: forecast.description[i],
-        icon: forecast.icon[i]
+        icon: forecast.icon[i],
+        pop: forecast.pop[i]
     }))
     return renderedForecastItems
 })
@@ -123,7 +155,7 @@ const getAllForecastItemsByDaysAndHours = ((forecast) => {
             icon: forecast.icon[index] ?? "03d",
             visibility: forecast.visibility[index] ?? 10,
             windDeg: forecast.windDeg[index] ?? 0,
-            windSpeed: forecast.windSpeed[index] ?? 0,
+            windSpeed: forecast.windSpeed[index] ?? 0
         }
     }
 
@@ -237,4 +269,4 @@ const setContainerBackground = ((icon) => {
     return containerBackground
 })
 
-export default { getWeather, getForecast, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }
+export default { getWeather, getForecast, getDates, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }

@@ -336,21 +336,9 @@ a:active {
     }
 
     .forecast-card-container .card:first-child {
-        grid-row: span 2;
-    }
-
-    .forecast-card-container .card:first-child {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .card:first-child img {
-        inline-size: 100px;
-    }
-
-    .forecast-card-container .card:first-child .icon-container {
-        block-size: 100px;
     }
 
     .weather-element-icon {

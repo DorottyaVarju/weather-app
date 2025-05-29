@@ -14,31 +14,7 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [dailyForecastItem, setDailyForecastItem] = useState('')
   const [chartData, setChartData] = useState(null)
-  const optionsDate = {
-    weekday: 'short',
-    day: '2-digit',
-    month: 'short',
-    year: 'numeric'
-  }
-
-  const optionsDateTime = {
-    ...optionsDate,
-    hour: '2-digit',
-    minute: '2-digit'
-  }
-
-  const dates = []
-
-  for (let i = 0; i < 6; i++) {
-    const date = new Date()
-    date.setDate(date.getDate() + i)
-
-    const formatted = i === 0
-      ? date.toLocaleString('en-GB', optionsDateTime)
-      : date.toLocaleDateString('en-GB', optionsDate)
-
-    dates.push(formatted)
-  }
+  const dates = weatherService.getDates()
 
   useEffect(() => {
     const trimmed = search.trim()
@@ -73,7 +49,6 @@ const App = () => {
             dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
             formattedAll = weatherService.formatFetchedData(rawWeather.list)
             chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
-            console.log(formattedAll);
           } else {
             formatted = null
             formattedAll = null
@@ -84,11 +59,11 @@ const App = () => {
         })
     }
   }, [search])
-
+  console.log(forecast)
   const handleSearch = (event) => {
     setSearch(event.target.value)
   }
- console.log(chartData)
+
   return (
     <>
       <main>

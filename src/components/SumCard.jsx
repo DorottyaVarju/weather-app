@@ -1,7 +1,6 @@
 import weatherService from '../services/weather'
 
 const SumCard = ({ weather, date }) => {
-
     const containerStyle = weatherService.setContainerBackground(weather.icon);
 
     return (
