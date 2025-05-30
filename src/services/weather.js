@@ -33,36 +33,45 @@ const getWeather = (place) => getData(place, baseUrlWeather)
 
 const getForecast = (place) => getData(place, baseUrlForecast)
 
-
-const getDates = () => {
+const getDates = (timezoneOffsetSeconds = 0) => {
     const optionsDate = {
         weekday: 'short',
         day: '2-digit',
         month: 'short',
-        year: 'numeric'
-    }
+        year: 'numeric',
+        hour12: false,
+    };
 
     const optionsDateTime = {
         ...optionsDate,
         hour: '2-digit',
-        minute: '2-digit'
-    }
+        minute: '2-digit',
+    };
 
-    const dates = []
+    const dates = [];
 
     for (let i = 0; i < 6; i++) {
-        const date = new Date()
-        date.setDate(date.getDate() + i)
+        const baseUtc = new Date();
+        const utcDate = new Date(Date.UTC(
+            baseUtc.getUTCFullYear(),
+            baseUtc.getUTCMonth(),
+            baseUtc.getUTCDate() + i,
+            baseUtc.getUTCHours(),
+            baseUtc.getUTCMinutes()
+        ));
+
+        const localDate = new Date(utcDate.getTime() + timezoneOffsetSeconds * 1000);
 
         const formatted = i === 0
-            ? date.toLocaleString('en-GB', optionsDateTime)
-            : date.toLocaleDateString('en-GB', optionsDate)
+            ? localDate.toLocaleString('en-GB', optionsDateTime)
+            : localDate.toLocaleDateString('en-GB', optionsDate);
 
-        dates.push(formatted)
+        dates.push(formatted);
     }
 
-    return dates
-}
+    return dates;
+};
+
 
 const getWindDirectionText = (deg) => {
     if (deg > 0 && deg < 45) {

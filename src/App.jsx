@@ -14,7 +14,7 @@ const App = () => {
   const [search, setSearch] = useState('')
   const [dailyForecastItem, setDailyForecastItem] = useState('')
   const [chartData, setChartData] = useState(null)
-  const dates = weatherService.getDates()
+  const [dates, setDates] = useState(null)
 
   useEffect(() => {
     const trimmed = search.trim()
@@ -22,18 +22,21 @@ const App = () => {
       weatherService
         .getWeather(trimmed)
         .then(rawWeather => {
-          let formatted
+          let formatted, timezone
           if (rawWeather !== null) {
             formatted = weatherService.formatFetchedData(rawWeather)
             weatherService.setBodyBackground(formatted.icon, formatted.temperature)
+            timezone = formatted.timezone
           } else {
             formatted = null
+            timezone = null
           }
           setWeather(formatted)
+          setDates(weatherService.getDates(timezone))
         })
     }
   }, [search])
-
+console.log(dates)
   useEffect(() => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
