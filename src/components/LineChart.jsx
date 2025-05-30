@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -23,7 +24,24 @@ ChartJS.register(
     ChartDataLabels
 )
 
+const getFontSize = (width) => {
+    if (width < 600) return 12
+    if (width < 1024) return 14
+    return 16
+}
+
 const LineChart = ({ data, date }) => {
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, []);
+
+    const fontSize = getFontSize(windowWidth)
+
     const chartData = {
         labels: data.map(item => item.hour),
         datasets: [
@@ -39,7 +57,7 @@ const LineChart = ({ data, date }) => {
                     color: '#1e3975',
                     anchor: 'end',
                     align: 'center',
-                    font: { weight: 'bold', size: 10 },
+                    font: { weight: 'bold', size: fontSize-4 },
                     formatter: (value) => `${value}%`
                 }
             },
@@ -55,7 +73,7 @@ const LineChart = ({ data, date }) => {
                     color: 'rgb(194, 127, 4)',
                     anchor: 'end',
                     align: 'center',
-                    font: { weight: 'bold', size: 10 },
+                    font: { weight: 'bold', size: fontSize-4 },
                     formatter: (value) => `${value}°C`
                 }
             },
@@ -71,7 +89,7 @@ const LineChart = ({ data, date }) => {
                     color: '#235e11',
                     anchor: 'end',
                     align: 'center',
-                    font: { weight: 'bold', size: 10 },
+                    font: { weight: 'bold', size: fontSize-4 },
                     formatter: (value) => `${value}m/s`
                 }
             },
@@ -95,7 +113,9 @@ const LineChart = ({ data, date }) => {
                     display: false
                 },
                 ticks: {
-                    color: '#4c76d8'
+                    color: '#4c76d8',
+                    padding: 5,
+                    font: { size: fontSize }
                 }
             },
             y: {
@@ -103,13 +123,19 @@ const LineChart = ({ data, date }) => {
                     display: false
                 },
                 ticks: {
-                    color: '#4c76d8'
+                    color: '#4c76d8',
+                    padding: 15,
+                    font: { size: fontSize }
                 }
             }
         }
     }
 
-    return <Line options={options} data={chartData} />
+    return (
+        <div className="chart-container">
+            <Line options={options} data={chartData} />
+        </div>
+    )
 }
 
 export default LineChart

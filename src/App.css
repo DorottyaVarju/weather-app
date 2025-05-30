@@ -298,6 +298,13 @@ img {
     align-items: center;
 }
 
+.chart-container {
+    max-block-size: 400px;
+    inline-size: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 footer {
     margin: 0;
     background: #4361ee33;
