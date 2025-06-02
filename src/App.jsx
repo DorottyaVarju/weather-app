@@ -36,7 +36,7 @@ const App = () => {
         })
     }
   }, [search])
-console.log(dates)
+
   useEffect(() => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {

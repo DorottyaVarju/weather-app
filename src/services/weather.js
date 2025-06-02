@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { DateTime } from 'luxon'
 import clearImg from '../../src/images/clear.jpg'
 import cloudsImg from '../../src/images/clouds.jpg'
 import fewCloudsImg from '../../src/images/few_clouds.jpg'
@@ -40,38 +41,30 @@ const getDates = (timezoneOffsetSeconds = 0) => {
         month: 'short',
         year: 'numeric',
         hour12: false,
-    };
+    }
 
     const optionsDateTime = {
         ...optionsDate,
         hour: '2-digit',
         minute: '2-digit',
-    };
-
-    const dates = [];
-
-    for (let i = 0; i < 6; i++) {
-        const baseUtc = new Date();
-        const utcDate = new Date(Date.UTC(
-            baseUtc.getUTCFullYear(),
-            baseUtc.getUTCMonth(),
-            baseUtc.getUTCDate() + i,
-            baseUtc.getUTCHours(),
-            baseUtc.getUTCMinutes()
-        ));
-
-        const localDate = new Date(utcDate.getTime() + timezoneOffsetSeconds * 1000);
-
-        const formatted = i === 0
-            ? localDate.toLocaleString('en-GB', optionsDateTime)
-            : localDate.toLocaleDateString('en-GB', optionsDate);
-
-        dates.push(formatted);
     }
 
-    return dates;
-};
+    const dates = []
+    let now = DateTime.utc()
 
+    for (let i = 0; i < 6; i++) {
+        const localDate = now.plus({ seconds: timezoneOffsetSeconds })
+
+        const formatted = i === 0
+            ? localDate.toFormat('ccc, dd MMM yyyy HH:mm')
+            : localDate.toFormat('ccc, dd MMM yyyy')
+
+        dates.push(formatted)
+        now = now.plus({ days: 1 })
+    }
+
+    return dates
+}
 
 const getWindDirectionText = (deg) => {
     if (deg > 0 && deg < 45) {
@@ -224,7 +217,7 @@ const getDataForChart = (dateStr, chartData) => {
                     temperature: values.temperature,
                     humidity: values.humidity,
                     windSpeed: values.windSpeed
-                };
+                }
             } else {
                 return null
             }
