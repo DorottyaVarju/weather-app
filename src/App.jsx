@@ -17,6 +17,14 @@ const App = () => {
   const [dates, setDates] = useState(null)
   const [errorMsg, setErrorMsg] = useState('')
 
+  const errorMsgUpdate = () => {
+    let errorMsg = 'Please enter a city, town, or village name.'
+    if (search !== '') {
+      errorMsg = 'Please enter a valid city, town, or village name.'
+    }
+    setErrorMsg(errorMsg)
+  }
+
   useEffect(() => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
@@ -39,11 +47,7 @@ const App = () => {
           console.error('An error occured:', error);
         })
     } else {
-      let errorMsg = 'Please enter a city, town, or village name.'
-      if (search !== '') {
-        errorMsg = 'Please enter a valid city, town, or village name.'
-      }
-      setErrorMsg(errorMsg)
+      errorMsgUpdate()
     }
   }, [search])
 
@@ -78,11 +82,7 @@ const App = () => {
           console.error('An error occured:', error);
         })
     } else {
-      let errorMsg = 'Please enter a city, town, or village name.'
-      if (search !== '') {
-        errorMsg = 'Please enter a valid city, town, or village name.'
-      }
-      setErrorMsg(errorMsg)
+      errorMsgUpdate()
     }
   }, [search])
 
