@@ -15,6 +15,7 @@ const App = () => {
   const [dailyForecastItem, setDailyForecastItem] = useState('')
   const [chartData, setChartData] = useState(null)
   const [dates, setDates] = useState(null)
+  const [errorMsg, setErrorMsg] = useState('')
 
   useEffect(() => {
     const trimmed = search.trim()
@@ -23,8 +24,8 @@ const App = () => {
         .getWeather(trimmed)
         .then(rawWeather => {
           let formatted, timezone
-          if (rawWeather !== null) {
-            formatted = weatherService.formatFetchedData(rawWeather)
+          if (rawWeather.data !== undefined && (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
+            formatted = weatherService.formatFetchedData(rawWeather.data)
             weatherService.setBodyBackground(formatted.icon, formatted.temperature)
             timezone = formatted.timezone
           } else {
@@ -34,6 +35,15 @@ const App = () => {
           setWeather(formatted)
           setDates(weatherService.getDates(timezone))
         })
+        .catch(error => {
+          console.error('An error occured:', error);
+        })
+    } else {
+      let errorMsg = 'Please enter a city, town, or village name.'
+      if (search !== '') {
+        errorMsg = 'Please enter a valid city, town, or village name.'
+      }
+      setErrorMsg(errorMsg)
     }
   }, [search])
 
@@ -43,23 +53,36 @@ const App = () => {
       weatherService
         .getForecast(trimmed)
         .then(rawWeather => {
-          let formatted, formattedAll, dailyForecastItems, chartDataAll
-          if (rawWeather !== null) {
-            const daily = rawWeather.list.filter(entry =>
+          let formatted, formattedAll, dailyForecastItems, chartDataAll, errorMsgText = ''
+          if (rawWeather.data !== undefined && (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
+            const daily = rawWeather.data.list.filter(entry =>
               entry.dt_txt.includes("12:00:00")
             )
             formatted = weatherService.formatFetchedData(daily)
             dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
-            formattedAll = weatherService.formatFetchedData(rawWeather.list)
+            formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
             chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
           } else {
+            if (rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
+              errorMsgText = String(rawWeather.message)
+            }
             formatted = null
             formattedAll = null
           }
+          setErrorMsg(errorMsgText)
           setDailyForecastItem(dailyForecastItems)
           setChartData(chartDataAll);
           setForecast(formatted)
         })
+        .catch(error => {
+          console.error('An error occured:', error);
+        })
+    } else {
+      let errorMsg = 'Please enter a city, town, or village name.'
+      if (search !== '') {
+        errorMsg = 'Please enter a valid city, town, or village name.'
+      }
+      setErrorMsg(errorMsg)
     }
   }, [search])
 
@@ -72,6 +95,7 @@ const App = () => {
       <main>
         <h1>Weather App</h1>
         <Search search={search} handleSearch={handleSearch} />
+        {errorMsg !== '' && <p>{errorMsg}</p>}
         {weather !== null && (
           <>
             <SumCard weather={weather} date={dates[0]} />

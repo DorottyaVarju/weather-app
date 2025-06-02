@@ -21,12 +21,34 @@ const apiKey = import.meta.env.VITE_WEATHER_KEY
 const baseUrlWeather = 'https://api.openweathermap.org/data/2.5/weather'
 const baseUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast'
 
+const handleError = (error) => {
+    let message = 'An unknown error occurred.'
+
+    if (error.response) {
+        if (error.response.status === 404) {
+            message = "Please enter a valid city, town, or village name."
+        } else {
+            message = `Error: ${error.response.status} - ${error.response.data.message || 'Unknown error'}`
+            console.error("Server responded with error:", error.response.status)
+        }
+    } else if (error.request) {
+        console.error("No response received:", error.request)
+        message = "No response from server."
+    } else {
+        console.error("Error setting up the request:", error.message)
+        message = `Request error: ${error.message}`
+    }
+
+    return { success: false, message }
+}
+
 const getData = (place, baseUrl) => {
-    const request = axios.get(`${baseUrl}?q=${place}&appid=${apiKey}`)
-    return request
-        .then(response => response.data)
+    return axios.get(`${baseUrl}?q=${place}&appid=${apiKey}`)
+        .then(response => {
+            return { success: true, data: response.data }
+        })
         .catch((error) => {
-            return null
+            return handleError(error)
         })
 }
 
