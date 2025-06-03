@@ -62,9 +62,9 @@ const App = () => {
                     formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
                     dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
                     chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
+                  } else {
+                    weatherService.setBodyBackground(formatted.icon, formatted.temperature)
                   }
-
-                  weatherService.setBodyBackground(formatted.icon, formatted.temperature)
                   timezone = formatted.timezone
                 } else {
                   if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
@@ -79,8 +79,8 @@ const App = () => {
                   setForecast(formatted)
                 } else {
                   setWeather(formatted)
-                }
                   setDates(weatherService.getDates(timezone))
+                }
               })
               .catch(error => {
                 console.error('An error occurred:', error)
@@ -122,7 +122,7 @@ const App = () => {
           <>
             <hr className="main-hr" />
             <h2>Forecast For The Rest Of The Day</h2>
-            <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(', ').slice(0, 2).join(', ')} />
+            <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(' ').slice(0, 4).join(' ')} />
             <hr className="main-hr" />
             <h2>Forecast For The Next Few Days</h2>
             <ScrollFade weather={dailyForecastItem[1]} date={dates[1]} isForecast={true} city={search} />
