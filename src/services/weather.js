@@ -21,7 +21,7 @@ const apiKey = import.meta.env.VITE_WEATHER_KEY
 const baseUrlWeather = 'https://api.openweathermap.org/data/2.5/weather'
 const baseUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast'
 
-const handleError = (error) => {
+const handleWeatherError = (error) => {
     let message = 'An unknown error occurred.'
 
     if (error.response) {
@@ -42,19 +42,27 @@ const handleError = (error) => {
     return { success: false, message }
 }
 
-const getData = (place, baseUrl) => {
-    return axios.get(`${baseUrl}?q=${place}&appid=${apiKey}`)
+const getData = (path, errorHandler) => {
+    return axios.get(path)
         .then(response => {
             return { success: true, data: response.data }
         })
         .catch((error) => {
-            return handleError(error)
+            if (errorHandler) {
+                return errorHandler(error)
+            } else {
+                return error
+            }
         })
 }
 
-const getWeather = (place) => getData(place, baseUrlWeather)
+const getWeatherData = (place, baseUrl) => {
+    return getData(`${baseUrl}?q=${place}&appid=${apiKey}`, handleWeatherError)
+}
 
-const getForecast = (place) => getData(place, baseUrlForecast)
+const getCurrentWeather = (place) => getWeatherData(place, baseUrlWeather)
+
+const getForecast = (place) => getWeatherData(place, baseUrlForecast)
 
 const getDates = (timezoneOffsetSeconds = 0) => {
     const optionsDate = {
@@ -318,4 +326,4 @@ const setContainerBackground = ((icon) => {
     return containerBackground
 })
 
-export default { getWeather, getForecast, getDates, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }
+export default { getData, getCurrentWeather, getForecast, getDates, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }

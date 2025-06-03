@@ -28,55 +28,66 @@ const App = () => {
   const fetchWeatherData = (isForecast, fetchMethod) => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
-      fetchMethod(trimmed)
-        .then(rawWeather => {
-          let formatted = null
-          let timezone = null
-          let formattedAll = null
-          let dailyForecastItems = null
-          let chartDataAll = null
-          let errorMsgText = ''
+      weatherService.getData('/data/city-names.json')
+        .then(cities => {
+          const lowerCaseSearch = trimmed.toLowerCase()
+          const matchedCity = cities.data.find(city => city.toLowerCase() === lowerCaseSearch)
+          if (matchedCity) {
+            fetchMethod(trimmed)
+              .then(rawWeather => {
+                let formatted = null
+                let timezone = null
+                let formattedAll = null
+                let dailyForecastItems = null
+                let chartDataAll = null
+                let errorMsgText = ''
 
-          if (rawWeather.data !== undefined &&
-            (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
+                if (rawWeather.data !== undefined &&
+                  (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
 
-            let daily
-            if (isForecast) {
-              daily = rawWeather.data.list.filter(entry =>
-                entry.dt_txt.includes("12:00:00")
-              )
-            } else {
-              daily = rawWeather.data
-            }
+                  let daily
+                  if (isForecast) {
+                    daily = rawWeather.data.list.filter(entry =>
+                      entry.dt_txt.includes("12:00:00")
+                    )
+                  } else {
+                    daily = rawWeather.data
+                  }
 
-            formatted = weatherService.formatFetchedData(daily)
+                  formatted = weatherService.formatFetchedData(daily)
 
-            if (isForecast) {
-              formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
-              dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
-              chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
-            }
+                  if (isForecast) {
+                    formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
+                    dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
+                    chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
+                  }
 
-            weatherService.setBodyBackground(formatted.icon, formatted.temperature)
-            timezone = formatted.timezone
+                  weatherService.setBodyBackground(formatted.icon, formatted.temperature)
+                  timezone = formatted.timezone
+                } else {
+                  if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
+                    errorMsgText = String(rawWeather.message)
+                  }
+                }
+
+                if (isForecast) {
+                  setErrorMsg(errorMsgText)
+                  setDailyForecastItem(dailyForecastItems)
+                  setChartData(chartDataAll)
+                  setForecast(formatted)
+                } else {
+                  setWeather(formatted)
+                  setDates(weatherService.getDates(timezone))
+                }
+              })
+              .catch(error => {
+                console.error('An error occurred:', error)
+              })
           } else {
-            if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
-              errorMsgText = String(rawWeather.message)
-            }
+            setWeather(null)
+            setForecast(null)
+            errorMsgUpdate()
           }
-
-          if (isForecast) {
-            setErrorMsg(errorMsgText)
-            setDailyForecastItem(dailyForecastItems)
-            setChartData(chartDataAll)
-            setForecast(formatted)
-          } else {
-            setWeather(formatted)
-            setDates(weatherService.getDates(timezone))
-          }
-        })
-        .catch(error => {
-          console.error('An error occurred:', error)
         })
     } else {
       errorMsgUpdate()
@@ -84,7 +95,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchWeatherData(false, weatherService.getWeather)
+    fetchWeatherData(false, weatherService.getCurrentWeather)
     fetchWeatherData(true, weatherService.getForecast)
   }, [search])
 
