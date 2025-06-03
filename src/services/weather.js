@@ -73,12 +73,6 @@ const getDates = (timezoneOffsetSeconds = 0) => {
         hour12: false,
     }
 
-    const optionsDateTime = {
-        ...optionsDate,
-        hour: '2-digit',
-        minute: '2-digit',
-    }
-
     const dates = []
     let now = DateTime.utc()
 
