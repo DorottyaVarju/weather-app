@@ -25,7 +25,7 @@ const App = () => {
     setErrorMsg(errorMsg)
   }
 
-  const fetchData = (isForecast, fetchMethod) => {
+  const fetchWeatherData = (isForecast, fetchMethod) => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
       fetchMethod(trimmed)
@@ -84,8 +84,8 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchData(false, weatherService.getWeather)
-    fetchData(true, weatherService.getForecast)
+    fetchWeatherData(false, weatherService.getWeather)
+    fetchWeatherData(true, weatherService.getForecast)
   }, [search])
 
   const handleSearch = (event) => {
