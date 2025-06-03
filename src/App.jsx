@@ -25,65 +25,67 @@ const App = () => {
     setErrorMsg(errorMsg)
   }
 
-  useEffect(() => {
+  const fetchData = (isForecast, fetchMethod) => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
-      weatherService
-        .getWeather(trimmed)
+      fetchMethod(trimmed)
         .then(rawWeather => {
-          let formatted, timezone
-          if (rawWeather.data !== undefined && (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
-            formatted = weatherService.formatFetchedData(rawWeather.data)
+          let formatted = null
+          let timezone = null
+          let formattedAll = null
+          let dailyForecastItems = null
+          let chartDataAll = null
+          let errorMsgText = ''
+
+          if (rawWeather.data !== undefined &&
+            (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
+
+            let daily
+            if (isForecast) {
+              daily = rawWeather.data.list.filter(entry =>
+                entry.dt_txt.includes("12:00:00")
+              )
+            } else {
+              daily = rawWeather.data
+            }
+
+            formatted = weatherService.formatFetchedData(daily)
+
+            if (isForecast) {
+              formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
+              dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
+              chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
+            }
+
             weatherService.setBodyBackground(formatted.icon, formatted.temperature)
             timezone = formatted.timezone
           } else {
-            formatted = null
-            timezone = null
-          }
-          setWeather(formatted)
-          setDates(weatherService.getDates(timezone))
-        })
-        .catch(error => {
-          console.error('An error occured:', error);
-        })
-    } else {
-      errorMsgUpdate()
-    }
-  }, [search])
-
-  useEffect(() => {
-    const trimmed = search.trim()
-    if (trimmed.length >= 2) {
-      weatherService
-        .getForecast(trimmed)
-        .then(rawWeather => {
-          let formatted, formattedAll, dailyForecastItems, chartDataAll, errorMsgText = ''
-          if (rawWeather.data !== undefined && (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
-            const daily = rawWeather.data.list.filter(entry =>
-              entry.dt_txt.includes("12:00:00")
-            )
-            formatted = weatherService.formatFetchedData(daily)
-            dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
-            formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
-            chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
-          } else {
-            if (rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
+            if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
               errorMsgText = String(rawWeather.message)
             }
-            formatted = null
-            formattedAll = null
           }
-          setErrorMsg(errorMsgText)
-          setDailyForecastItem(dailyForecastItems)
-          setChartData(chartDataAll);
-          setForecast(formatted)
+
+          if (isForecast) {
+            setErrorMsg(errorMsgText)
+            setDailyForecastItem(dailyForecastItems)
+            setChartData(chartDataAll)
+            setForecast(formatted)
+          } else {
+            setWeather(formatted)
+            setDates(weatherService.getDates(timezone))
+          }
         })
         .catch(error => {
-          console.error('An error occured:', error);
+          console.error('An error occurred:', error)
         })
     } else {
       errorMsgUpdate()
     }
+  }
+
+  useEffect(() => {
+    fetchData(false, weatherService.getWeather)
+    fetchData(true, weatherService.getForecast)
   }, [search])
 
   const handleSearch = (event) => {
