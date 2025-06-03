@@ -79,8 +79,8 @@ const App = () => {
                   setForecast(formatted)
                 } else {
                   setWeather(formatted)
-                  setDates(weatherService.getDates(timezone))
                 }
+                  setDates(weatherService.getDates(timezone))
               })
               .catch(error => {
                 console.error('An error occurred:', error)
