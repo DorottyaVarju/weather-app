@@ -59,3 +59,5 @@ as a result, the component re-renders and returns not only the `Search` componen
 #### Additional notes
 
 - if a React app is created with Vite, environment variable names must start with `VITE_`
+- the city.list.json.gz is downloaded from: https://bulk.openweathermap.org/sample/ --> after extraction the file data is reduced to just ids and names
+- weather and forecast data from: https://openweathermap.org/
