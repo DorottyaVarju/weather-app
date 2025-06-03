@@ -56,13 +56,13 @@ const getData = (path, errorHandler) => {
         })
 }
 
-const getWeatherData = (place, baseUrl) => {
-    return getData(`${baseUrl}?q=${place}&appid=${apiKey}`, handleWeatherError)
+const getWeatherData = (placeID, baseUrl) => {
+    return getData(`${baseUrl}?id=${placeID}&appid=${apiKey}`, handleWeatherError)
 }
 
-const getCurrentWeather = (place) => getWeatherData(place, baseUrlWeather)
+const getCurrentWeather = (placeID) => getWeatherData(placeID, baseUrlWeather)
 
-const getForecast = (place) => getWeatherData(place, baseUrlForecast)
+const getForecast = (placeID) => getWeatherData(placeID, baseUrlForecast)
 
 const getDates = (timezoneOffsetSeconds = 0) => {
     const optionsDate = {

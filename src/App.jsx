@@ -28,12 +28,14 @@ const App = () => {
   const fetchWeatherData = (isForecast, fetchMethod) => {
     const trimmed = search.trim()
     if (trimmed.length >= 2) {
-      weatherService.getData('/data/city-names.json')
+      weatherService.getData('/data/city-min.json')
         .then(cities => {
           const lowerCaseSearch = trimmed.toLowerCase()
-          const matchedCity = cities.data.find(city => city.toLowerCase() === lowerCaseSearch)
+          const matchedCity = cities.data.find(city =>
+            city.name.toLowerCase() === lowerCaseSearch
+          )
           if (matchedCity) {
-            fetchMethod(trimmed)
+            fetchMethod(matchedCity.id)
               .then(rawWeather => {
                 let formatted = null
                 let timezone = null
