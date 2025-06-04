@@ -1,12 +1,14 @@
 ## Weather App (built with Vite + ReactJS)
 
-### Start the app based on your operating system:
+### You can try the app here: https://vdweatherapp.netlify.app/
+
+### Start the app in your local environment based on your operating system:
 
 - Linux/maxOS Bash: `export VITE_WEATHER_KEY=your_api_key_here && npm run dev`
 - Windows PowerShell: `($env:VITE_WEATHER_KEY="your_api_key_here") -and (npm run dev)`
 - Windows cmd.exe: set `"VITE_WEATHER_KEY=your_api_key_here" && npm run dev`
 
-Replace your_api_key_here with your actual API key
+Replace your_api_key_here with your actual OpenWeather API key
 
 ### Technical description
 
