@@ -92,6 +92,10 @@ const App = () => {
           }
         })
     } else {
+      if (weather !== null) {
+        setWeather(null)
+        setForecast(null)
+      }
       errorMsgUpdate()
     }
   }
@@ -111,15 +115,11 @@ const App = () => {
         <h1>Weather App</h1>
         <Search search={search} handleSearch={handleSearch} />
         {errorMsg !== '' && <p>{errorMsg}</p>}
-        {weather !== null && (
+        {weather !== null && forecast !== null && (
           <>
             <SumCard weather={weather} date={dates[0]} />
             <h2>Current Weather Details</h2>
             <ScrollFade weather={weather} date={null} isForecast={false} />
-          </>
-        )}
-        {forecast !== null && (
-          <>
             <hr className="main-hr" />
             <h2>Forecast For The Rest Of The Day</h2>
             <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(' ').slice(0, 4).join(' ')} />
