@@ -58,8 +58,9 @@ const App = () => {
                     chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
                   } else {
                     weatherService.setBodyBackground(formatted.icon, formatted.temperature)
+                    timezone = formatted.timezone
                   }
-                  timezone = formatted.timezone
+
                 } else {
                   if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
                     errorMsgText = String(rawWeather.message)
@@ -72,7 +73,6 @@ const App = () => {
                     forecast: formatted,
                     dailyForecastItem: dailyForecastItems,
                     chartData: chartDataAll,
-                    dates: weatherService.getDates(timezone),
                     errorMsg: errorMsgText
                   }))
                 } else {
@@ -96,14 +96,17 @@ const App = () => {
           }
         })
     } else {
-      if (data.weather !== null) {
-        setData(prevData => ({
+      setData(prevData => {
+        const updatedData = {
           ...prevData,
-          weather: null,
-          forecast: null,
-          errorMsg: weatherService.getErrorMsgText(search)
-        }))
-      }
+          errorMsg: weatherService.getErrorMsgText(search),
+        }
+        if (data.weather !== null) {
+          updatedData.weather = null
+          updatedData.forecast = null
+        }
+        return updatedData
+      })
     }
   }
 

@@ -73,14 +73,6 @@ const getCurrentWeather = (placeID) => getWeatherData(placeID, baseUrlWeather)
 const getForecast = (placeID) => getWeatherData(placeID, baseUrlForecast)
 
 const getDates = (timezoneOffsetSeconds = 0) => {
-    const optionsDate = {
-        weekday: 'short',
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-        hour12: false,
-    }
-
     const dates = []
     let now = DateTime.utc()
 
@@ -120,7 +112,6 @@ const getWindDirectionText = (deg) => {
 
 const formatFetchedData = ((raw) => {
     const isCurrent = 'coord' in raw
-    let windDegText
 
     if (isCurrent) {
         const { main, wind, clouds, visibility, weather, sys, name } = raw
