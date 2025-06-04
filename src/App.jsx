@@ -9,21 +9,15 @@ import './App.css'
 
 const App = () => {
 
-  const [weather, setWeather] = useState(null)
-  const [forecast, setForecast] = useState(null)
   const [search, setSearch] = useState('')
-  const [dailyForecastItem, setDailyForecastItem] = useState('')
-  const [chartData, setChartData] = useState(null)
-  const [dates, setDates] = useState(null)
-  const [errorMsg, setErrorMsg] = useState('')
-
-  const errorMsgUpdate = () => {
-    let errorMsg = 'Please enter a city, town, or village name.'
-    if (search !== '') {
-      errorMsg = 'Please enter a valid city, town, or village name.'
-    }
-    setErrorMsg(errorMsg)
-  }
+  const [data, setData] = useState({
+    weather: null,
+    forecast: null,
+    dailyForecastItem: '',
+    chartData: null,
+    dates: null,
+    errorMsg: ''
+  })
 
   const fetchWeatherData = (isForecast, fetchMethod) => {
     const trimmed = search.trim()
@@ -73,30 +67,43 @@ const App = () => {
                 }
 
                 if (isForecast) {
-                  setErrorMsg(errorMsgText)
-                  setDailyForecastItem(dailyForecastItems)
-                  setChartData(chartDataAll)
-                  setForecast(formatted)
+                  setData(prevData => ({
+                    ...prevData,
+                    forecast: formatted,
+                    dailyForecastItem: dailyForecastItems,
+                    chartData: chartDataAll,
+                    dates: weatherService.getDates(timezone),
+                    errorMsg: errorMsgText
+                  }))
                 } else {
-                  setWeather(formatted)
-                  setDates(weatherService.getDates(timezone))
+                  setData(prevData => ({
+                    ...prevData,
+                    weather: formatted,
+                    dates: weatherService.getDates(timezone)
+                  }))
                 }
               })
               .catch(error => {
                 console.error('An error occurred:', error)
               })
           } else {
-            setWeather(null)
-            setForecast(null)
-            errorMsgUpdate()
+            setData(prevData => ({
+              ...prevData,
+              weather: null,
+              forecast: null,
+              errorMsg: weatherService.getErrorMsgText(search)
+            }))
           }
         })
     } else {
-      if (weather !== null) {
-        setWeather(null)
-        setForecast(null)
+      if (data.weather !== null) {
+        setData(prevData => ({
+          ...prevData,
+          weather: null,
+          forecast: null,
+          errorMsg: weatherService.getErrorMsgText(search)
+        }))
       }
-      errorMsgUpdate()
     }
   }
 
@@ -114,28 +121,28 @@ const App = () => {
       <main>
         <h1>Weather App</h1>
         <Search search={search} handleSearch={handleSearch} />
-        {errorMsg !== '' && <p>{errorMsg}</p>}
-        {weather !== null && forecast !== null && (
+        {data.errorMsg !== '' && <p>{data.errorMsg}</p>}
+        {data.weather !== null && data.forecast !== null && (
           <>
-            <SumCard weather={weather} date={dates[0]} />
+            <SumCard weather={data.weather} date={data.dates[0]} />
             <h2>Current Weather Details</h2>
-            <ScrollFade weather={weather} date={null} isForecast={false} />
+            <ScrollFade weather={data.weather} date={null} isForecast={false} />
             <hr className="main-hr" />
             <h2>Forecast For The Rest Of The Day</h2>
-            <LineChart data={weatherService.getDataForChart(dates[0], chartData)} date={dates[0].split(' ').slice(0, 4).join(' ')} />
+            <LineChart data={weatherService.getDataForChart(data.dates[0], data.chartData)} date={data.dates[0].split(' ').slice(0, 4).join(' ')} />
             <hr className="main-hr" />
             <h2>Forecast For The Next Few Days</h2>
-            <ScrollFade weather={dailyForecastItem[1]} date={dates[1]} isForecast={true} city={search} />
-            <LineChart data={weatherService.getDataForChart(dates[1], chartData)} date={dates[1]} />
+            <ScrollFade weather={data.dailyForecastItem[1]} date={data.dates[1]} isForecast={true} city={search} />
+            <LineChart data={weatherService.getDataForChart(data.dates[1], data.chartData)} date={data.dates[1]} />
             <hr />
-            <ScrollFade weather={dailyForecastItem[2]} date={dates[2]} isForecast={true} city={search} />
-            <LineChart data={weatherService.getDataForChart(dates[2], chartData)} date={dates[2]} />
+            <ScrollFade weather={data.dailyForecastItem[2]} date={data.dates[2]} isForecast={true} city={search} />
+            <LineChart data={weatherService.getDataForChart(data.dates[2], data.chartData)} date={data.dates[2]} />
             <hr />
-            <ScrollFade weather={dailyForecastItem[3]} date={dates[3]} isForecast={true} city={search} />
-            <LineChart data={weatherService.getDataForChart(dates[3], chartData)} date={dates[3]} />
+            <ScrollFade weather={data.dailyForecastItem[3]} date={data.dates[3]} isForecast={true} city={search} />
+            <LineChart data={weatherService.getDataForChart(data.dates[3], data.chartData)} date={data.dates[3]} />
             <hr />
-            <ScrollFade weather={dailyForecastItem[4]} date={dates[4]} isForecast={true} city={search} />
-            <LineChart data={weatherService.getDataForChart(dates[4], chartData)} date={dates[4]} />
+            <ScrollFade weather={data.dailyForecastItem[4]} date={data.dates[4]} isForecast={true} city={search} />
+            <LineChart data={weatherService.getDataForChart(data.dates[4], data.chartData)} date={data.dates[4]} />
           </>
         )}
       </main>

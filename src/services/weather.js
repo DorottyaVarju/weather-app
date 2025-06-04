@@ -42,6 +42,14 @@ const handleWeatherError = (error) => {
     return { success: false, message }
 }
 
+const getErrorMsgText = (search) => {
+    let errorMsg = 'Please enter a city, town, or village name.'
+    if (search !== '') {
+        errorMsg = 'Please enter a valid city, town, or village name.'
+    }
+    return errorMsg
+}
+
 const getData = (path, errorHandler) => {
     return axios.get(path)
         .then(response => {
@@ -320,4 +328,4 @@ const setContainerBackground = ((icon) => {
     return containerBackground
 })
 
-export default { getData, getCurrentWeather, getForecast, getDates, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground }
+export default { getData, getCurrentWeather, getForecast, getDates, formatFetchedData, getDataForChart, getRenderedForecastItems, getAllForecastItemsByDaysAndHours, setBodyBackground, setContainerBackground, getErrorMsgText }
