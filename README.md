@@ -154,27 +154,27 @@ Type a place name on the line
 
 The app takes a moment to process, then displays the current weather and forecast data.
   
-![6](https://github.com/user-attachments/assets/d31818b7-3ce0-49ff-ac33-2a1b208b068b)
-![4](https://github.com/user-attachments/assets/141e1088-ae99-473f-9186-ae030fd840cf)
-![3](https://github.com/user-attachments/assets/645ed0d0-4417-4c2e-8e73-ae46927c6222)
-![2](https://github.com/user-attachments/assets/ff513a8b-8b35-467f-ad87-efaa89199f64)
 ![1](https://github.com/user-attachments/assets/f7262d15-27d4-4d0c-b212-2208687a7658)
+![2](https://github.com/user-attachments/assets/ff513a8b-8b35-467f-ad87-efaa89199f64)
+![3](https://github.com/user-attachments/assets/645ed0d0-4417-4c2e-8e73-ae46927c6222)
+![4](https://github.com/user-attachments/assets/141e1088-ae99-473f-9186-ae030fd840cf)
+![6](https://github.com/user-attachments/assets/d31818b7-3ce0-49ff-ac33-2a1b208b068b)
 
 According to the current weather or time, the app's appearance changes.
 The app's appearance at night:
 
-![d0a11a8a-ffe8-44cf-acb4-2c5af6e72f6e](https://github.com/user-attachments/assets/e76332a9-200f-43ca-a819-e538618cccbb)
-![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/3b373876-a8a6-4ca3-aec0-9fd2268814de)
 ![4418f4d5-a3cd-4da0-80ef-03970a4d3be1](https://github.com/user-attachments/assets/c58530ad-a8b6-45b0-8f6e-181ccbc637a1)
-![3ce395fe-48f4-42c2-903f-2da672f61d46](https://github.com/user-attachments/assets/512be9c7-cf80-4253-aeb7-9477597d3e7e)
+![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/3b373876-a8a6-4ca3-aec0-9fd2268814de)
+![d0a11a8a-ffe8-44cf-acb4-2c5af6e72f6e](https://github.com/user-attachments/assets/e76332a9-200f-43ca-a819-e538618cccbb)
 ![2bddb6a2-7b2b-4a70-a34c-094aa1497be1](https://github.com/user-attachments/assets/0aea51ea-5bf5-49c2-ae3d-e6da8b3db54e)
+![3ce395fe-48f4-42c2-903f-2da672f61d46](https://github.com/user-attachments/assets/512be9c7-cf80-4253-aeb7-9477597d3e7e)
 
 The app's appearance when the current weather is sunny and warm:
 
-![4](https://github.com/user-attachments/assets/e8f4d224-9337-433f-8abf-c0a60f616e6f)
-![3](https://github.com/user-attachments/assets/ca117f92-fc14-45c4-ad97-ce11a73f941b)
-![2](https://github.com/user-attachments/assets/8c76943b-dfa3-43d9-b8b6-445ad732ba64)
 ![1](https://github.com/user-attachments/assets/8384feae-e2eb-4534-85b6-e91fd1c1a9cd)
+![2](https://github.com/user-attachments/assets/8c76943b-dfa3-43d9-b8b6-445ad732ba64)
+![3](https://github.com/user-attachments/assets/ca117f92-fc14-45c4-ad97-ce11a73f941b)
+![4](https://github.com/user-attachments/assets/e8f4d224-9337-433f-8abf-c0a60f616e6f)
 
 
 
