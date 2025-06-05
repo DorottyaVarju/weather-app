@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import weatherService from '../services/weather'
 import Card from './Card'
 import { FaDroplet, FaTemperatureHalf, FaCloud, FaEye, FaCloudRain } from "react-icons/fa6"
@@ -12,7 +12,7 @@ const ScrollFade = ({ weather, date, isForecast, city }) => {
     const [showLeftFade, setShowLeftFade] = useState(false)
     const [showRightFade, setShowRightFade] = useState(false)
     const weatherElementIconClass = 'weather-element-icon'
-    const containerStyle = weatherService.setContainerBackground(weather.icon);
+    const containerStyle = weatherService.setContainerBackground(weather.icon)
     let classNameForCardContainer = 'card-container'
 
     if (isForecast) {
