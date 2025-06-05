@@ -148,6 +148,8 @@ as a result, the component re-renders and returns not only the `Search` componen
 
 ### User Guide
 
+The layout of this weather app was designed with a mobile-first approach, which is why the following screenshots were taken on a mobile device.
+
 Type a place name on the line
 
 ![0](https://github.com/user-attachments/assets/3d85c9b3-ff41-4732-bf6a-bde90f586d40)
@@ -162,6 +164,7 @@ The app takes a moment to process, then displays the current weather and forecas
 
 According to the current weather or time, the app's appearance changes.
 The app's appearance at night:
+(In the case shown in the screenshot below, there is no 'Forecast For The Rest Of The Day' chart because the last forecast data is for 10 p.m.)
 
 ![4418f4d5-a3cd-4da0-80ef-03970a4d3be1](https://github.com/user-attachments/assets/c58530ad-a8b6-45b0-8f6e-181ccbc637a1)
 ![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/3b373876-a8a6-4ca3-aec0-9fd2268814de)
