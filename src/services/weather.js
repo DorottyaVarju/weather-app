@@ -223,13 +223,14 @@ const getIsoDate = (date) => {
 }
 
 const getDataForChart = (dateStr, chartData) => {
-    const now = new Date()
+    const now = new Date(dateStr)
     const isoDateNow = getIsoDate(now)
     const timeNow = now.toTimeString().slice(0, 5)
 
     const selectedDate = new Date(dateStr)
     const isoDateSelectedDate = getIsoDate(selectedDate)
 
+    if(chartData === null) return null
     const rawData = chartData[isoDateSelectedDate]
 
     const dataForChart = Object.entries(rawData)

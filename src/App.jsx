@@ -120,6 +120,12 @@ const App = () => {
     setSearch(event.target.value)
   }
 
+  let chartDataForTheDay
+  
+  if(data.dates !== null) {
+    chartDataForTheDay = weatherService.getDataForChart(data.dates[0], data.chartData)
+  }
+
   return (
     <>
       <main>
@@ -132,10 +138,10 @@ const App = () => {
             <h2>Current Weather Details</h2>
             <ScrollFade weather={data.weather} date={null} isForecast={false} />
             <hr className="main-hr" />
-            {data.weather !== null && (
+            {chartDataForTheDay !== null && chartDataForTheDay.length > 0 && (
               <>
                 <h2>Forecast For The Rest Of The Day</h2>
-                <LineChart data={weatherService.getDataForChart(data.dates[0], data.chartData)} date={data.dates[0].split(' ').slice(0, 4).join(' ')} />
+                <LineChart data={chartDataForTheDay} date={data.dates[0].split(' ').slice(0, 4).join(' ')} />
                 <hr className="main-hr" />
               </>
             )}
