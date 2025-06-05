@@ -150,40 +150,32 @@ as a result, the component re-renders and returns not only the `Search` componen
 
 Type a place name on the line
 
-![aa265d1f-e647-4fdb-819a-a636145692d0](https://github.com/user-attachments/assets/5f86df13-6c80-4e33-9cb4-3364808ff22d)
+![0](https://github.com/user-attachments/assets/3d85c9b3-ff41-4732-bf6a-bde90f586d40)
 
 The app takes a moment to process, then displays the current weather and forecast data.
   
-![e66c7d93-40fa-41e3-aff8-ee0b6b5f5ceb](https://github.com/user-attachments/assets/59d4c37b-1a28-472e-9c5f-321a7cdde347)
-
-![1c41ed0a-da51-44b4-b88a-994f649c8fae](https://github.com/user-attachments/assets/06849c7c-aa4d-42b3-b511-7969c6a0c7c9)
-
-![645ed308-2fe5-4f2e-b065-35d5b0815e48](https://github.com/user-attachments/assets/2d965b3a-9712-4544-8866-c1251bb7ec10)
-
-![50280d2a-b57c-4550-81f7-0b1dbeda5f1c](https://github.com/user-attachments/assets/91a897ab-2110-4ab3-9157-3ba590757e3c)
+![6](https://github.com/user-attachments/assets/d31818b7-3ce0-49ff-ac33-2a1b208b068b)
+![4](https://github.com/user-attachments/assets/141e1088-ae99-473f-9186-ae030fd840cf)
+![3](https://github.com/user-attachments/assets/645ed0d0-4417-4c2e-8e73-ae46927c6222)
+![2](https://github.com/user-attachments/assets/ff513a8b-8b35-467f-ad87-efaa89199f64)
+![1](https://github.com/user-attachments/assets/f7262d15-27d4-4d0c-b212-2208687a7658)
 
 According to the current weather or time, the app's appearance changes.
 The app's appearance at night:
 
-![3ce395fe-48f4-42c2-903f-2da672f61d46](https://github.com/user-attachments/assets/27794d05-6350-4495-88ce-039ac933e605)
-
-![2bddb6a2-7b2b-4a70-a34c-094aa1497be1](https://github.com/user-attachments/assets/f0f4b6aa-65a2-47e2-b763-1931f1c19229)
-
-![d0a11a8a-ffe8-44cf-acb4-2c5af6e72f6e](https://github.com/user-attachments/assets/6dbb1d7d-7dbe-4e93-bd3c-85f269017dfb)
-
-![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/f612ca4c-5a6f-4b46-a951-5877807cdd5f)
-
-![4418f4d5-a3cd-4da0-80ef-03970a4d3be1](https://github.com/user-attachments/assets/2ec5c2c6-a28b-4eba-bd51-55248c7d7924)
+![d0a11a8a-ffe8-44cf-acb4-2c5af6e72f6e](https://github.com/user-attachments/assets/e76332a9-200f-43ca-a819-e538618cccbb)
+![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/3b373876-a8a6-4ca3-aec0-9fd2268814de)
+![4418f4d5-a3cd-4da0-80ef-03970a4d3be1](https://github.com/user-attachments/assets/c58530ad-a8b6-45b0-8f6e-181ccbc637a1)
+![3ce395fe-48f4-42c2-903f-2da672f61d46](https://github.com/user-attachments/assets/512be9c7-cf80-4253-aeb7-9477597d3e7e)
+![2bddb6a2-7b2b-4a70-a34c-094aa1497be1](https://github.com/user-attachments/assets/0aea51ea-5bf5-49c2-ae3d-e6da8b3db54e)
 
 The app's appearance when the current weather is sunny and warm:
 
-![9ed50986-031d-47b0-b853-c6c6bd548d2c](https://github.com/user-attachments/assets/d1331805-eaa4-43db-a99b-2cb4e39c4173)
+![4](https://github.com/user-attachments/assets/e8f4d224-9337-433f-8abf-c0a60f616e6f)
+![3](https://github.com/user-attachments/assets/ca117f92-fc14-45c4-ad97-ce11a73f941b)
+![2](https://github.com/user-attachments/assets/8c76943b-dfa3-43d9-b8b6-445ad732ba64)
+![1](https://github.com/user-attachments/assets/8384feae-e2eb-4534-85b6-e91fd1c1a9cd)
 
-![dd0a7055-1849-42ef-bf9d-eae48002e6b0](https://github.com/user-attachments/assets/1b0c22df-c399-4b23-879b-e772f565d68f)
-
-![ae58ef9d-afa0-423d-a6e8-7d5ff7d8a563](https://github.com/user-attachments/assets/bbbb845c-cfa2-4e7a-9a61-b846d52bde59)
-
-![9c987e96-9b2b-4b75-8151-747fc3ad43b8](https://github.com/user-attachments/assets/49a6dc43-1a25-4515-80da-2d24564e9686)
 
 
 
