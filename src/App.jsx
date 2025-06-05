@@ -20,7 +20,7 @@ const App = () => {
     errorMsg: ''
   })
 
-  const debouncedSearch = useDebounce(search, 500)
+  const debouncedSearch = useDebounce(search, 1000)
 
   const fetchWeatherData = (isForecast, fetchMethod) => {
     const trimmed = debouncedSearch.trim()

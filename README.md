@@ -51,7 +51,21 @@ as a result, the component re-renders and returns not only the `Search` componen
 - calls the `setContainerBackground` method from the `weatherService` to determine the background style for the card, the returned value is applied to the `sum-container` `div` as inline CSS
 
 #### ScrollFade component
-- always returns a `div` and conditionally an `h3`
+- always returns a `div` with nested elements inside and conditionally an `h3`
+    - there are multiple `Card` components inside the `div`, the first and the fourth `Card` components are conditionally rendered (only in the case of forecast)
+    - the last two `Card` components are rendered only if the `weather.sunrise` and `weather.sunset` exist
+    - the `scroll-fade-left` div is rendered only if the `showLeftFade` state variable is true
+    - the `scroll-fade-right` div is rendered only if the `showRightFade` state variable is true
+- three built-in `hooks` are used:
+    1. `useState`: `showLeftFade` and `showRightFade` state variables
+    2. `useEffect`: the side effect which checks (`checkFadeVisibility` function) whether the container needs a visible, it runs only after the first render (empty dependency array)
+        `checkFadeVisibility` function: 
+            - if the `container` variable does not exist, the function does nothing (`return`), otherwise:
+            - if the scrolling is started (`scrollLeft > 0` is true), it sets the `showLeftFade` state variable to true (and causes a re-render, so the `div` with the `class` `scroll-fade-left` is rendered)
+            - if the visible area (`scrollLeft + clientWidth`) is smaller than the full width (`scrollWidth - 1`), that means that the user did not reach the right side, so it sets the `showRightFade` state variable to true (and causes a re-render, so the `div` with the `class` `scroll-fade-right` is rendered)
+            - the function is is added as event handler function to the events scroll and resize
+            - cleanup for the event listeners is done in the useEffect return function (effect cleanup)
+    3. `useRef`: tracks the direct parent `div` of the `Card` elements
 
 #### LineChart component
 - 
@@ -96,6 +110,8 @@ as a result, the component re-renders and returns not only the `Search` componen
 #### Additional notes
 
 - if a React app is created with Vite, environment variable names must start with `VITE_`
+- `useRef` keeps track of DOM elements or variables, without causing the re-rendering of the component
+        - the current property is used to store the current value, and even if the current value changes, it will not re-render the component, which always happens in the case of state management
 - in the earlier version of the app, the city.list.json.gz file was downloaded from from: https://bulk.openweathermap.org/sample/ --> after extraction, the file contains data with a reduced set of information, just city ids and names, which can be processed using the following `Node.js` code:
     ```javascript
     const fs = require('fs');
@@ -116,5 +132,5 @@ as a result, the component re-renders and returns not only the `Search` componen
         console.log(`✅ ${simplifiedCities.length} cities saved to: ${outputFile}`);
     } catch (err) {
         console.error('❌ An error occurred:', err.message);
-    }```
+    }
 - weather and forecast data from: https://openweathermap.org/
