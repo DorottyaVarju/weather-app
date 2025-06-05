@@ -64,8 +64,8 @@ const getData = (path, errorHandler) => {
         })
 }
 
-const getWeatherData = (placeID, baseUrl) => {
-    return getData(`${baseUrl}?id=${placeID}&appid=${apiKey}`, handleWeatherError)
+const getWeatherData = (placeName, baseUrl) => {
+    return getData(`${baseUrl}?q=${placeName}&appid=${apiKey}`, handleWeatherError)
 }
 
 const getCurrentWeather = (placeID) => getWeatherData(placeID, baseUrlWeather)

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import weatherService from './services/weather'
+import useDebounce from './hooks/useDebounce'
 import Search from './components/Search'
 import SumCard from './components/SumCard'
 import ScrollFade from './components/ScrollFade'
@@ -19,87 +20,73 @@ const App = () => {
     errorMsg: ''
   })
 
+  const debouncedSearch = useDebounce(search, 500)
+
   const fetchWeatherData = (isForecast, fetchMethod) => {
-    const trimmed = search.trim()
+    const trimmed = debouncedSearch.trim()
     if (trimmed.length >= 2) {
-      weatherService.getData('/data/city-min.json')
-        .then(cities => {
-          const lowerCaseSearch = trimmed.toLowerCase()
-          const matchedCity = cities.data.find(city =>
-            city.name.toLowerCase() === lowerCaseSearch
-          )
-          if (matchedCity) {
-            fetchMethod(matchedCity.id)
-              .then(rawWeather => {
-                let formatted = null
-                let timezone = null
-                let formattedAll = null
-                let dailyForecastItems = null
-                let chartDataAll = null
-                let errorMsgText = ''
+      fetchMethod(trimmed)
+        .then(rawWeather => {
+          let formatted = null
+          let timezone = null
+          let formattedAll = null
+          let dailyForecastItems = null
+          let chartDataAll = null
+          let errorMsgText = ''
 
-                if (rawWeather.data !== undefined &&
-                  (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
+          if (rawWeather.data !== undefined &&
+            (rawWeather.message === undefined || rawWeather.message === 0 || rawWeather.message === null)) {
 
-                  let daily
-                  if (isForecast) {
-                    daily = rawWeather.data.list.filter(entry =>
-                      entry.dt_txt.includes("12:00:00")
-                    )
-                  } else {
-                    daily = rawWeather.data
-                  }
+            let daily
+            if (isForecast) {
+              daily = rawWeather.data.list.filter(entry =>
+                entry.dt_txt.includes("12:00:00")
+              )
+            } else {
+              daily = rawWeather.data
+            }
 
-                  formatted = weatherService.formatFetchedData(daily)
+            formatted = weatherService.formatFetchedData(daily)
 
-                  if (isForecast) {
-                    formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
-                    dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
-                    chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
-                  } else {
-                    weatherService.setBodyBackground(formatted.icon, formatted.temperature)
-                    timezone = formatted.timezone
-                  }
+            if (isForecast) {
+              formattedAll = weatherService.formatFetchedData(rawWeather.data.list)
+              dailyForecastItems = weatherService.getRenderedForecastItems(formatted)
+              chartDataAll = weatherService.getAllForecastItemsByDaysAndHours(formattedAll)
+            } else {
+              weatherService.setBodyBackground(formatted.icon, formatted.temperature)
+              timezone = formatted.timezone
+            }
 
-                } else {
-                  if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
-                    errorMsgText = String(rawWeather.message)
-                  }
-                }
+          } else {
+            if (isForecast && rawWeather.message !== undefined && rawWeather.message !== 0 && rawWeather.message !== null) {
+              errorMsgText = String(rawWeather.message)
+            }
+          }
 
-                if (isForecast) {
-                  setData(prevData => ({
-                    ...prevData,
-                    forecast: formatted,
-                    dailyForecastItem: dailyForecastItems,
-                    chartData: chartDataAll,
-                    errorMsg: errorMsgText
-                  }))
-                } else {
-                  setData(prevData => ({
-                    ...prevData,
-                    weather: formatted,
-                    dates: weatherService.getDates(timezone)
-                  }))
-                }
-              })
-              .catch(error => {
-                console.error('An error occurred:', error)
-              })
+          if (isForecast) {
+            setData(prevData => ({
+              ...prevData,
+              forecast: formatted,
+              dailyForecastItem: dailyForecastItems,
+              chartData: chartDataAll,
+              errorMsg: errorMsgText
+            }))
           } else {
             setData(prevData => ({
               ...prevData,
-              weather: null,
-              forecast: null,
-              errorMsg: weatherService.getErrorMsgText(search)
+              weather: formatted,
+              dates: weatherService.getDates(timezone)
             }))
           }
+        })
+        .catch(error => {
+          console.error('An error occurred:', error)
         })
     } else {
       setData(prevData => {
         const updatedData = {
           ...prevData,
-          errorMsg: weatherService.getErrorMsgText(search),
+          errorMsg: weatherService.getErrorMsgText(debouncedSearch),
         }
         if (data.weather !== null) {
           updatedData.weather = null
@@ -111,9 +98,23 @@ const App = () => {
   }
 
   useEffect(() => {
-    fetchWeatherData(false, weatherService.getCurrentWeather)
-    fetchWeatherData(true, weatherService.getForecast)
-  }, [search])
+    if (debouncedSearch) {
+      fetchWeatherData(false, weatherService.getCurrentWeather)
+      fetchWeatherData(true, weatherService.getForecast)
+    } else {
+      setData(prevData => {
+        const updatedData = {
+          ...prevData,
+          errorMsg: weatherService.getErrorMsgText(debouncedSearch),
+        }
+        if (data.weather !== null) {
+          updatedData.weather = null
+          updatedData.forecast = null
+        }
+        return updatedData
+      })
+    }
+  }, [debouncedSearch])
 
   const handleSearch = (event) => {
     setSearch(event.target.value)
