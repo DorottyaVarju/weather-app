@@ -145,3 +145,48 @@ as a result, the component re-renders and returns not only the `Search` componen
         console.error('❌ An error occurred:', err.message);
     }
 - weather and forecast data from: https://openweathermap.org/
+
+### User Guide
+
+Type a place name on the line
+
+![aa265d1f-e647-4fdb-819a-a636145692d0](https://github.com/user-attachments/assets/5f86df13-6c80-4e33-9cb4-3364808ff22d)
+
+The app takes a moment to process, then displays the current weather and forecast data.
+  
+![e66c7d93-40fa-41e3-aff8-ee0b6b5f5ceb](https://github.com/user-attachments/assets/59d4c37b-1a28-472e-9c5f-321a7cdde347)
+
+![1c41ed0a-da51-44b4-b88a-994f649c8fae](https://github.com/user-attachments/assets/06849c7c-aa4d-42b3-b511-7969c6a0c7c9)
+
+![645ed308-2fe5-4f2e-b065-35d5b0815e48](https://github.com/user-attachments/assets/2d965b3a-9712-4544-8866-c1251bb7ec10)
+
+![50280d2a-b57c-4550-81f7-0b1dbeda5f1c](https://github.com/user-attachments/assets/91a897ab-2110-4ab3-9157-3ba590757e3c)
+
+According to the current weather or time, the app's appearance changes.
+The app's appearance at night:
+
+![3ce395fe-48f4-42c2-903f-2da672f61d46](https://github.com/user-attachments/assets/27794d05-6350-4495-88ce-039ac933e605)
+
+![2bddb6a2-7b2b-4a70-a34c-094aa1497be1](https://github.com/user-attachments/assets/f0f4b6aa-65a2-47e2-b763-1931f1c19229)
+
+![d0a11a8a-ffe8-44cf-acb4-2c5af6e72f6e](https://github.com/user-attachments/assets/6dbb1d7d-7dbe-4e93-bd3c-85f269017dfb)
+
+![cc0654a3-896c-4328-9950-280f1589cb6c](https://github.com/user-attachments/assets/f612ca4c-5a6f-4b46-a951-5877807cdd5f)
+
+![4418f4d5-a3cd-4da0-80ef-03970a4d3be1](https://github.com/user-attachments/assets/2ec5c2c6-a28b-4eba-bd51-55248c7d7924)
+
+The app's appearance when the current weather is sunny and warm:
+
+![9ed50986-031d-47b0-b853-c6c6bd548d2c](https://github.com/user-attachments/assets/d1331805-eaa4-43db-a99b-2cb4e39c4173)
+
+![dd0a7055-1849-42ef-bf9d-eae48002e6b0](https://github.com/user-attachments/assets/1b0c22df-c399-4b23-879b-e772f565d68f)
+
+![ae58ef9d-afa0-423d-a6e8-7d5ff7d8a563](https://github.com/user-attachments/assets/bbbb845c-cfa2-4e7a-9a61-b846d52bde59)
+
+![9c987e96-9b2b-4b75-8151-747fc3ad43b8](https://github.com/user-attachments/assets/49a6dc43-1a25-4515-80da-2d24564e9686)
+
+
+
+
+
+
