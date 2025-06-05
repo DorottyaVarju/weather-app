@@ -131,9 +131,13 @@ const App = () => {
             <h2>Current Weather Details</h2>
             <ScrollFade weather={data.weather} date={null} isForecast={false} />
             <hr className="main-hr" />
-            <h2>Forecast For The Rest Of The Day</h2>
-            <LineChart data={weatherService.getDataForChart(data.dates[0], data.chartData)} date={data.dates[0].split(' ').slice(0, 4).join(' ')} />
-            <hr className="main-hr" />
+            {data.weather !== null && (
+              <>
+                <h2>Forecast For The Rest Of The Day</h2>
+                <LineChart data={weatherService.getDataForChart(data.dates[0], data.chartData)} date={data.dates[0].split(' ').slice(0, 4).join(' ')} />
+                <hr className="main-hr" />
+              </>
+            )}
             <h2>Forecast For The Next Few Days</h2>
             <ScrollFade weather={data.dailyForecastItem[1]} date={data.dates[1]} isForecast={true} city={search} />
             <LineChart data={weatherService.getDataForChart(data.dates[1], data.chartData)} date={data.dates[1]} />
