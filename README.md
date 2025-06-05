@@ -68,7 +68,16 @@ as a result, the component re-renders and returns not only the `Search` componen
     3. `useRef`: tracks the direct parent `div` of the `Card` elements
 
 #### LineChart component
-- 
+- returns a `div` element that contains a `Line chart` from `react-chartjs-2`
+- imported into the `App` component where it is rendered to display weather forecast data for a specific date
+- receives two props:
+    - `data`: an array of weather data, where each item contains the hour, humidity, temperature, and windSpeed values for a given hour
+    - `date`: a string representing the forecast date, which is displayed in the chart's title
+- uses the `useState` and `useEffect` hooks to track the window's width and adjust font size dynamically based on the screen size
+- configures the `chartData` with three datasets for humidity, temperature, and windspeed, each with custom labels, colors, and data points
+- applies the `chartjs-plugin-datalabels` plugin to display data values directly on the chart with custom formatting
+- defines options to configure chart appearance such as grid, ticks, title, and legend, with dynamic font size depending on the window width
+- the chart is rendered with responsive: true to ensure it adjusts properly when the window is resized
 
 #### Card component
 
@@ -106,6 +115,8 @@ as a result, the component re-renders and returns not only the `Search` componen
 - React Icons: 
     command to install: `npm install react-icons`
     https://react-icons.github.io/react-icons/
+- Chart.js --> react-chartjs-2:
+    command to install: `npm install chart.js react-chartjs-2`
 
 #### Additional notes
 
