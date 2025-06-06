@@ -15,20 +15,35 @@ Replace your_api_key_here with your actual OpenWeather API key
 #### App component
 
 - it returns 
-    - the `Search` component (always)
-    - a `div` (only if the `weather` state variable is not an empty string), which contains:
-        - an image
-        - a paragraph
-        - the `Card` component rendered multiple times
+    - a `main` element and the `Footer` component
+    - within the `main` element:
+        - the and `h1` element and `Search` component (always)
+        - an error message conditionally
+        - a bigger fragment (only if the `data.weather` and `data.forecast` object properties are not null), which contains:
+            - the  `SumCard `
+            - `h2` and  `hr ` elements
+            - the `ScrollFade` component multiple times
+            - the `LineChart` component multiple times (Forecast For The Rest Of The Day `h2` element and `LineChart` rendered only if the `chartDataForTheDay` variable is not null and it has array items)
 - 2 state variables are initialized:
-    - `search`
-    - `weather`
-- the `handleSearch` event handler function is defined here
-- an effect hook containing the `getWeather` function from the `weatherService` is executed:
+    - `search`: it stores the state of the text typed in the input field
+    - `data`: it is an object with the `weather`, `forecast`, `dailyForecastItem`, `chartData`, `dates` and `errorMsg` properties
+- the `handleSearch` event handler function sets new value of the input field with every typed in character
+- an effect hook is executed:
     - after the app is loaded in the browser (i.e., after the initial render)
-    - and every time the value of the `search` state variable changes
-- once the promise resolves, the `weather` state is updated with the result
-as a result, the component re-renders and returns not only the `Search` component, but also the image, paragraph, and multiple `Card` components
+    - and every time the value of the `debouncedSearch` state variable changes
+    - the `fetchWeatherData` function is executed 2 times (one for the weather, one for the forecast) if the `debouncedSearch` variable is "truthy" i.e. it has a "not empty" value, otherwise the `data` state variable is updated (only the `errorMsg` property changes and the `weather` and `forecast` properties only if their value is not null yet)
+- the `fetchWeatherData` function recieves the `isForecas` (`boolean`) and `fetchMethod` (the method's name which defined in the `weather` service) parameters 
+- once the promise resolves, the `data` state is updated conditionally, the component re-renders and returns not only the `Search` component, but conditionally the error message or the weather and forecast data
+
+##### `debouncedSearch` variable and `useDebounce` hook
+- the `debouncedSearch` variable gets the `useDebounce` custom hook's returned value
+- `useDebounce` hook
+    - recieves the `value` () and `delay` (ms) parameters
+    - the `debouncedValue` state variable is initialized with the initial value of the `value` parameter
+    - an effect hook runs after the initial render and after every time the `value` or `delay` changes
+        - with the `setTimeout` built-in JS function running of the `setDebouncedValue` delays by the `delay`
+        - it has a clearing part (`return`): the `clearTimeout` built-in JS function removes the timer --> it is needed, because if the user types fast, more and more timers may start
+    - returns `debouncedValue` by the delay(i.e. the input's value after the user stopped typing by the delay)
 
 #### Search component
 
@@ -117,10 +132,13 @@ as a result, the component re-renders and returns not only the `Search` componen
     https://react-icons.github.io/react-icons/
 - Chart.js --> react-chartjs-2:
     command to install: `npm install chart.js react-chartjs-2`
+- Luxon:
+    command to install: `npm install luxon`
 
 #### Additional notes
 
 - if a React app is created with Vite, environment variable names must start with `VITE_`
+- `useState` causes the re-rendering of the component i.e. after a state variable is set, the component re-renders
 - `useRef` keeps track of DOM elements or variables, without causing the re-rendering of the component
         - the current property is used to store the current value, and even if the current value changes, it will not re-render the component, which always happens in the case of state management
 - in the earlier version of the app, the city.list.json.gz file was downloaded from from: https://bulk.openweathermap.org/sample/ --> after extraction, the file contains data with a reduced set of information, just city ids and names, which can be processed using the following `Node.js` code:
