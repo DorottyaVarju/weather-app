@@ -130,12 +130,12 @@ const formatFetchedData = ((raw) => {
             description: weather[0]?.description ?? '',
             icon: weather[0]?.icon ?? '',
             sunrise: new Date(sys.sunrise * 1000).toLocaleTimeString('en-GB', {
-                minute: '2-digit',
-                second: '2-digit'
+                hour: '2-digit',
+                minute: '2-digit'
             }),
             sunset: new Date(sys.sunset * 1000).toLocaleTimeString('en-GB', {
-                minute: '2-digit',
-                second: '2-digit'
+                hour: '2-digit',
+                minute: '2-digit'
             }),
             city: name
         }
